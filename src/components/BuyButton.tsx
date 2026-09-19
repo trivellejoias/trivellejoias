@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
-import { createCheckoutSession, getStripeEnabled } from '@/lib/stripe'
+import products from '@/data/products'
+
+const WHATSAPP_NUMBER = '5519982124939'
 
 export function BuyButton({
   productId,
@@ -8,45 +9,34 @@ export function BuyButton({
   productId: number
   className?: string
 }) {
-  const [loading, setLoading] = useState(false)
-  const [stripeEnabled, setStripeEnabled] = useState<boolean | null>(null)
+  const product = products.find((item) => item.id === productId)
 
-  useEffect(() => {
-    getStripeEnabled().then(setStripeEnabled)
-  }, [])
+  if (!product) return null
 
-  const handleClick = async () => {
-    setLoading(true)
-    try {
-      const url = await createCheckoutSession({ data: productId })
-      if (url) {
-        window.location.href = url
-      }
-    } catch (error) {
-      console.error('Checkout error:', error)
-      setLoading(false)
-    }
-  }
+  const priceLabel = `${product.priceFrom ? 'a partir de ' : ''}R$ ${product.price.toLocaleString('pt-BR', {
+    minimumFractionDigits: 2,
+  })}`
 
-  if (stripeEnabled === false) {
-    return (
-      <button
-        disabled
-        className={`px-6 py-2 rounded-full border text-sm font-medium ${className}`}
-        title="Compra indisponível"
-      >
-        Indisponível
-      </button>
-    )
-  }
+  const message = [
+    'Olá! 💎',
+    '',
+    `Tenho interesse na peça: ${product.name}`,
+    `Valor: ${priceLabel}`,
+    '',
+    'Gostaria de saber como posso comprar.',
+  ].join('\n')
+
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
 
   return (
-    <button
-      onClick={handleClick}
-      disabled={loading || stripeEnabled === null}
-      className={`px-6 py-2 rounded-full border text-sm font-medium transition-colors disabled:cursor-wait disabled:opacity-70 ${className}`}
+    <a
+      href={whatsappUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`inline-flex items-center justify-center px-6 py-2 rounded-full border text-sm font-medium transition-colors ${className}`}
+      aria-label={`Comprar ${product.name} pelo WhatsApp`}
     >
-      {loading ? 'Processando...' : 'Comprar'}
-    </button>
+      Comprar pelo WhatsApp
+    </a>
   )
 }
