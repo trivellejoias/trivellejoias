@@ -112,7 +112,7 @@ function ProductsIndex() {
       </main>
 
       <footer className="border-t border-[color:var(--color-brand-light)] py-10 text-center text-sm text-[color:var(--color-ink)]/60">
-        © {new Date().getFullYear()} Trivelle — joias em aço inox que não escurecem. <Link to="/admin" className="ml-2 underline">Editar catálogo</Link>
+        © {new Date().getFullYear()} Trivelle — joias em aço inox que não escurecem.
       </footer>
     </div>
   )
