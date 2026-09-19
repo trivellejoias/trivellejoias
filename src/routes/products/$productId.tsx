@@ -22,13 +22,29 @@ function RouteComponent() {
     <div className="min-h-screen bg-[#fffdfc]">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 px-6 py-14">
         <div className="w-full md:w-1/2">
-          <div className="aspect-square rounded-2xl overflow-hidden border border-[color:var(--color-brand-light)]">
+          <div className="aspect-square rounded-2xl overflow-hidden border border-[color:var(--color-brand-light)] bg-white">
             <img
               src={product.image}
               alt={product.name}
               className="w-full h-full object-cover"
             />
           </div>
+          {product.images.length > 1 && (
+            <div className="grid grid-cols-4 gap-3 mt-3">
+              {product.images.slice(0, 4).map((image, index) => (
+                <div
+                  key={image}
+                  className="aspect-square rounded-xl overflow-hidden border border-[color:var(--color-brand-light)] bg-white"
+                >
+                  <img
+                    src={image}
+                    alt={`${product.name} — foto ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="w-full md:w-1/2">
@@ -49,7 +65,7 @@ function RouteComponent() {
           </p>
           <div className="flex items-center justify-between border-t border-[color:var(--color-brand-light)] pt-6">
             <div className="font-display text-2xl font-semibold text-[color:var(--color-brand-dark)]">
-              R$ {product.price.toLocaleString('pt-BR')}
+              {product.priceFrom ? 'A partir de ' : ''}R$ {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
             </div>
             <BuyButton
               productId={product.id}

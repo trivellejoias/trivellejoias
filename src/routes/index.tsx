@@ -13,6 +13,9 @@ const categories: Array<Product['category'] | 'Todos'> = [
   'Brincos',
   'Colares',
   'Pulseiras',
+  'Tornozeleiras',
+  'Conjuntos',
+  'Outros',
 ]
 
 function ProductsIndex() {
@@ -91,7 +94,7 @@ function ProductsIndex() {
                 </p>
                 <div className="flex items-center justify-between">
                   <div className="font-display text-lg font-semibold text-[color:var(--color-brand-dark)]">
-                    R$ {product.price.toLocaleString('pt-BR')}
+                    {product.priceFrom ? 'A partir de ' : ''}R$ {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                   </div>
                   <BuyButton
                     productId={product.id}
