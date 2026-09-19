@@ -31,6 +31,11 @@ function AdminPage() {
     setOverrides((prev) => ({ ...prev, [String(id)]: { ...(prev[String(id)] ?? {}), ...patch } }))
   }
 
+  function saveLocal() {
+    localStorage.setItem('trivelle-catalog-overrides', JSON.stringify(overrides))
+    alert('Alterações salvas neste dispositivo. Para publicar para todas as clientes, baixe o arquivo e substitua catalog-overrides.json no GitHub.')
+  }
+
   function download() {
     const blob = new Blob([JSON.stringify(overrides, null, 2)], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
@@ -50,9 +55,9 @@ function AdminPage() {
           <div>
             <Link to="/" className="text-sm underline">← Voltar ao catálogo</Link>
             <h1 className="font-display text-3xl md:text-4xl mt-3">Editar catálogo</h1>
-            <p className="text-sm opacity-70 mt-2">Edite títulos, descrições, preços, fotos ou oculte anúncios.</p>
+            <p className="text-sm opacity-70 mt-2">Edite títulos, descrições, preços, fotos ou oculte/exclua anúncios. Produtos com estoque 0 na Shopee não aparecem no catálogo.</p>
           </div>
-          <button onClick={download} className="rounded-full px-5 py-3 bg-[color:var(--color-brand-dark)] text-white">Baixar alterações</button>
+          <div className="flex flex-wrap gap-2"><button onClick={saveLocal} className="rounded-full px-5 py-3 border border-[color:var(--color-brand-dark)] text-[color:var(--color-brand-dark)]">Salvar neste dispositivo</button><button onClick={download} className="rounded-full px-5 py-3 bg-[color:var(--color-brand-dark)] text-white">Baixar alterações</button></div>
         </div>
 
         <div className="grid md:grid-cols-[320px_1fr] gap-6">
@@ -76,7 +81,7 @@ function AdminPage() {
                   <div className="text-xs opacity-60">ID {current.id} · estoque {current.stock}</div>
                   <h2 className="font-display text-2xl mt-1">{current.name}</h2>
                 </div>
-                <label className="flex items-center gap-2 text-sm whitespace-nowrap"><input type="checkbox" checked={!!currentOverride.hidden} onChange={(e) => update(current.id, { hidden: e.target.checked })} /> Ocultar</label>
+                <label className="flex items-center gap-2 text-sm whitespace-nowrap"><input type="checkbox" checked={!!currentOverride.hidden} onChange={(e) => update(current.id, { hidden: e.target.checked })} /> Ocultar / excluir do catálogo</label>
               </div>
               <div className="space-y-5">
                 <label className="block text-sm">Título<input className="mt-1 w-full rounded-xl border px-4 py-3" value={currentOverride.name ?? current.name} onChange={(e) => update(current.id, { name: e.target.value })} /></label>
@@ -89,7 +94,7 @@ function AdminPage() {
                     {(currentOverride.images ?? current.images).map((img, i) => <input key={i} className="w-full rounded-xl border px-4 py-3 text-sm" value={img} onChange={(e) => { const arr = [...(currentOverride.images ?? current.images)]; arr[i] = e.target.value; update(current.id, { images: arr, image: arr[0] }) }} />)}
                   </div>
                 </div>
-                <p className="text-xs opacity-60">Depois de editar, clique em “Baixar alterações”. Substitua o arquivo <b>public/catalog-overrides.json</b> no GitHub e faça o commit. As alterações ficarão publicadas para todas as clientes.</p>
+                <p className="text-xs opacity-60">Você pode salvar para testar neste dispositivo. Para publicar para todas as clientes, clique em “Baixar alterações” e substitua o arquivo <b>public/catalog-overrides.json</b> no GitHub. Depois faça o commit. Fotos devem ser URLs públicas.</p>
               </div>
             </>}
           </section>
