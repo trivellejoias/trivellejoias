@@ -5,7 +5,7 @@ export default async (request: Request) => {
 
   try {
     const { password } = await request.json()
-    const expected = Deno.env.get('ADMIN_PASSWORD')
+    const expected = process.env.ADMIN_PASSWORD
 
     if (!expected || typeof password !== 'string' || password !== expected) {
       return Response.json({ ok: false }, { status: 401 })
