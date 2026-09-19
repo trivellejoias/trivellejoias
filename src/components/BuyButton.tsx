@@ -1,4 +1,6 @@
 import products from '@/data/products'
+import { useEffect, useState } from 'react'
+import { applyOverride, loadCatalogOverrides, type ProductOverride } from '@/lib/catalog'
 
 const WHATSAPP_NUMBER = '5519982124939'
 
@@ -9,7 +11,10 @@ export function BuyButton({
   productId: number
   className?: string
 }) {
-  const product = products.find((item) => item.id === productId)
+  const baseProduct = products.find((item) => item.id === productId)
+  const [override, setOverride] = useState<ProductOverride>({})
+  useEffect(() => { loadCatalogOverrides().then((all) => setOverride(all[String(productId)] ?? {})) }, [productId])
+  const product = baseProduct ? applyOverride(baseProduct, { [String(productId)]: override }) : null
 
   if (!product) return null
 

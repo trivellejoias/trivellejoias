@@ -1,7 +1,8 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, createFileRoute } from '@tanstack/react-router'
 import products, { type Product } from '@/data/products'
 import { BuyButton } from '@/components/BuyButton'
+import { applyOverride, loadCatalogOverrides, type CatalogOverrides } from '@/lib/catalog'
 
 export const Route = createFileRoute('/')({
   component: ProductsIndex,
@@ -19,17 +20,20 @@ const categories: Array<Product['category'] | 'Todos'> = [
 ]
 
 function ProductsIndex() {
+  const [overrides, setOverrides] = useState<CatalogOverrides>({})
+  useEffect(() => { loadCatalogOverrides().then(setOverrides) }, [])
+
   const [activeCategory, setActiveCategory] = useState<
     (typeof categories)[number]
   >('Todos')
 
-  const filtered = useMemo(
-    () =>
-      activeCategory === 'Todos'
-        ? products
-        : products.filter((p) => p.category === activeCategory),
-    [activeCategory],
-  )
+  const filtered = useMemo(() => {
+    const available = products
+      .filter((p) => p.stock > 0)
+      .map((p) => applyOverride(p, overrides))
+      .filter((p) => !p.hidden)
+    return activeCategory === 'Todos' ? available : available.filter((p) => p.category === activeCategory)
+  }, [activeCategory, overrides])
 
   return (
     <div className="min-h-screen bg-[#fffdfc]">

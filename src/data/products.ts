@@ -1,6 +1,7 @@
 export type ProductCategory = "Anéis" | "Brincos" | "Colares" | "Pulseiras" | "Tornozeleiras" | "Conjuntos" | "Outros"
 export interface Product {
   id: number
+  stock: number
   name: string
   category: ProductCategory
   image: string
@@ -14,6 +15,7 @@ export interface Product {
 const products: Array<Product> = [
   {
     id: 58264257068,
+    stock: 1,
     name: "Brinco Feminino Pequeno Formato Concha  - Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820mc-mqntus374u0z50",
@@ -24,6 +26,7 @@ const products: Array<Product> = [
   },
   {
     id: 58264256487,
+    stock: 1,
     name: "Tornozeleira Ponto de Luz Geométrico Quadrado - Aço Inox (Não Escurece)",
     category: "Tornozeleiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820mc-mqntgjvtt4ar85",
@@ -34,6 +37,7 @@ const products: Array<Product> = [
   },
   {
     id: 58264256084,
+    stock: 2,
     name: "Colar Feminino Dourado Flocos de Neve e Pontos de Luz - Aço Inox (Não Escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820l8-mqnt9vov9rsw7b",
@@ -44,6 +48,7 @@ const products: Array<Product> = [
   },
   {
     id: 58264253958,
+    stock: 1,
     name: "Colar Duplo Feminino com Pingentes de Trevo - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820m3-mqntus37agar50",
@@ -54,6 +59,7 @@ const products: Array<Product> = [
   },
   {
     id: 58264253815,
+    stock: 1,
     name: "Pulseira Prateada ou Dourada Corações Verdes Resinados - Aço Inox (Não Escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820mg-mqntgjvtxc039c",
@@ -64,6 +70,7 @@ const products: Array<Product> = [
   },
   {
     id: 58264252919,
+    stock: 1,
     name: "Pulseira Regulável Dourada Pingente Flor Minimalista - Aço Inox (Não Escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820ln-mqnt9vovdzi88c",
@@ -74,6 +81,7 @@ const products: Array<Product> = [
   },
   {
     id: 58263866094,
+    stock: 1,
     name: "Gargantilha Fio de Nylon Invisível Coração Madrepérola Fecho em - Aço Inox (Não Escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820mg-mqdu9i3jm5flbf",
@@ -84,6 +92,7 @@ const products: Array<Product> = [
   },
   {
     id: 58263852625,
+    stock: 1,
     name: "Brinco Geométrico Quadrado Design Minimalista - Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820mb-mqdqjq83ewox36",
@@ -94,6 +103,7 @@ const products: Array<Product> = [
   },
   {
     id: 58263852404,
+    stock: 0,
     name: "Colar Gravatinha Pingentes de Borboletas Dourado - Aço Inox (Não Escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820mf-mqdqjq7xaebm94",
@@ -104,6 +114,7 @@ const products: Array<Product> = [
   },
   {
     id: 58263847703,
+    stock: 1,
     name: "Colar Feminino Pingente Medalha Círculo Grande Madreperola - Aço Inox (Não Escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820mg-mqdqjq83hpttc2",
@@ -114,6 +125,7 @@ const products: Array<Product> = [
   },
   {
     id: 58263656863,
+    stock: 2,
     name: "Gargantilha Prateada ou Dourada Choker Aro Rígido com Tubo Curvado - Aço inox (Não Escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820lk-mq80eej7gxdt16",
@@ -124,6 +136,7 @@ const products: Array<Product> = [
   },
   {
     id: 58263656598,
+    stock: 1,
     name: "Anel Design Conceitual Chapa Retangular Lisa - Aço Inox (Não Escurece)",
     category: "Anéis",
     image: "https://cf.shopee.com.br/file/br-11134207-820mc-mq80eej7e48xdc",
@@ -134,6 +147,7 @@ const products: Array<Product> = [
   },
   {
     id: 58263656489,
+    stock: 0,
     name: "Anel Ajustável Espiral Dois Quadrados - Aço Inox (Não Escurece)",
     category: "Anéis",
     image: "https://cf.shopee.com.br/file/br-11134201-820la-mqx4wymviolh5e",
@@ -144,6 +158,7 @@ const products: Array<Product> = [
   },
   {
     id: 58263656224,
+    stock: 4,
     name: "Anel Quadrado Vazado Fino - Aço Inox (Não Escurece)",
     category: "Anéis",
     image: "https://cf.shopee.com.br/file/br-11134207-820lf-mq80eej7wef602",
@@ -154,6 +169,7 @@ const products: Array<Product> = [
   },
   {
     id: 58263651500,
+    stock: 3,
     name: "Anel Minimalista Formato Em V, Estilo Chevron - Aço Inox (Não Escurece)",
     category: "Anéis",
     image: "https://cf.shopee.com.br/file/br-11134201-820la-mqx4wxxo581z8e",
@@ -164,6 +180,7 @@ const products: Array<Product> = [
   },
   {
     id: 58263475215,
+    stock: 1,
     name: "Brinco Duplo Duas Pérolas - Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lq-mqc97fskks8x6a",
@@ -174,6 +191,7 @@ const products: Array<Product> = [
   },
   {
     id: 58263452747,
+    stock: 1,
     name: "Brinco de Flor Dourada Texturizada Grande - Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lb-mq7nq9od7ke9f7",
@@ -184,6 +202,7 @@ const products: Array<Product> = [
   },
   {
     id: 58263444664,
+    stock: 1,
     name: "Brinco Meia Flor Dourada Abaulada - Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lx-mq7nq9odbs3lca",
@@ -194,6 +213,7 @@ const products: Array<Product> = [
   },
   {
     id: 58263444514,
+    stock: 1,
     name: "Brinco Maxi Redondo Plissado Ondulado Vazado - Aço Inox (Não Escuece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134201-820lt-mqx4w7gvxh5036",
@@ -204,6 +224,7 @@ const products: Array<Product> = [
   },
   {
     id: 58260980862,
+    stock: 2,
     name: "Colar Choker Minimalista Feminino Prata Lisa Delicada Elegante e Moderna - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820lx-mofseziypv5vcf",
@@ -214,6 +235,7 @@ const products: Array<Product> = [
   },
   {
     id: 58260621492,
+    stock: 3,
     name: "Brinco Feminino Geométrico Meia Lua Texturizado Prata, Design Moderno e Elegante Minimalista - Aço inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820mc-mo6z0z1luvi93e",
@@ -224,6 +246,7 @@ const products: Array<Product> = [
   },
   {
     id: 58260177861,
+    stock: 144,
     name: "Colar de Letra Inicial com Ponto de Luz (Personalizado) - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820l5-mnw8xzqlovt047",
@@ -234,6 +257,7 @@ const products: Array<Product> = [
   },
   {
     id: 58260030462,
+    stock: 5,
     name: "Pulseira Riviera com Pedras de Zircônia Rosa Pink Prateada - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820lg-mnszox1ami9tfd",
@@ -244,6 +268,7 @@ const products: Array<Product> = [
   },
   {
     id: 58260029623,
+    stock: 1,
     name: "Brinco Base Oval com Pingente Retangular Vazado Dourado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820ls-mnsxxa949mv8fd",
@@ -254,6 +279,7 @@ const products: Array<Product> = [
   },
   {
     id: 58259526412,
+    stock: 4,
     name: "Pulseira Delicada com Pérolas e Zircônias - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820mb-mnfyuts5kjcx49",
@@ -264,6 +290,7 @@ const products: Array<Product> = [
   },
   {
     id: 58259517283,
+    stock: 3,
     name: "Brinco Petalas Flor folha dourado Feminino Em Formato De Flor - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820m0-mnfyf3re6znlb8",
@@ -274,6 +301,7 @@ const products: Array<Product> = [
   },
   {
     id: 58257800637,
+    stock: 3,
     name: "Brinco Geométrico Triângulo Minimalista - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820mb-mmc9dns9do1z9d",
@@ -284,6 +312,7 @@ const products: Array<Product> = [
   },
   {
     id: 58257794718,
+    stock: 1,
     name: "Piercing de Argola com Cruz - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820l4-mmc9dns9m3gn6e",
@@ -294,6 +323,7 @@ const products: Array<Product> = [
   },
   {
     id: 58257745381,
+    stock: 3,
     name: "Anel Ajustável Duplo Ponto de Luz - Aço Inox (Não escurece)",
     category: "Anéis",
     image: "https://cf.shopee.com.br/file/br-11134207-820m0-mmba535v41l3b5",
@@ -304,6 +334,7 @@ const products: Array<Product> = [
   },
   {
     id: 58257744615,
+    stock: 1,
     name: "Anel Ajustável Corações Vazados - Aço Inox (Não escurece)",
     category: "Anéis",
     image: "https://cf.shopee.com.br/file/br-11134207-820lu-mmbaibhe1laf0b",
@@ -314,6 +345,7 @@ const products: Array<Product> = [
   },
   {
     id: 58257739890,
+    stock: 1,
     name: "Brinco Ramo de Folhas Delicado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lk-mmb8o2y7uhog8c",
@@ -324,6 +356,7 @@ const products: Array<Product> = [
   },
   {
     id: 58257518868,
+    stock: 0,
     name: "Brinco de Cruz Palito Delicado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820l8-mmb8o2y7m29s19",
@@ -334,6 +367,7 @@ const products: Array<Product> = [
   },
   {
     id: 58257517854,
+    stock: 0,
     name: "Pulseira Religiosa com Pingentes Cruz, Medalha e Espírito Santo - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820l5-mm9bkw23ywhw8a",
@@ -344,6 +378,7 @@ const products: Array<Product> = [
   },
   {
     id: 58257517041,
+    stock: 2,
     name: "Brinco Ponto de Luz Rosa Delicado Pendente - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820md-mm7q718dp5a8a3",
@@ -354,6 +389,7 @@ const products: Array<Product> = [
   },
   {
     id: 58257516895,
+    stock: 1,
     name: "Bracelete Torcido Elegante - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820l8-mmb8o2zcp69s2a",
@@ -364,6 +400,7 @@ const products: Array<Product> = [
   },
   {
     id: 58256545845,
+    stock: 1,
     name: "Brinco Trevo Delicado com Resina Preta - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lk-mlkzut3x01dxbf",
@@ -374,6 +411,7 @@ const products: Array<Product> = [
   },
   {
     id: 58256264128,
+    stock: 2,
     name: "Brinco Ponto de Luz com Corrente e Pérola - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820m9-mlfh616yikue7f",
@@ -384,6 +422,7 @@ const products: Array<Product> = [
   },
   {
     id: 58256112380,
+    stock: 0,
     name: "Colar Corrente Dupla com Miçangas Coloridas Tons Pastéis – Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820lj-mlcrrc5qfe9z73",
@@ -394,6 +433,7 @@ const products: Array<Product> = [
   },
   {
     id: 58256109524,
+    stock: 0,
     name: "Brinco Ponto de Luz Coração Cravejado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lq-mlcrrc68djie4d",
@@ -404,6 +444,7 @@ const products: Array<Product> = [
   },
   {
     id: 58256108977,
+    stock: 2,
     name: "Brinco Botão Círculo Vazado Minimalista - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820me-mlcrrc5mydqd46",
@@ -414,6 +455,7 @@ const products: Array<Product> = [
   },
   {
     id: 58256108708,
+    stock: 0,
     name: "Pulseira Feminina Prateada Coração com Zircônias Brilhantes – Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820la-mlcrrc5mwz5x54",
@@ -424,6 +466,7 @@ const products: Array<Product> = [
   },
   {
     id: 58256009058,
+    stock: 1,
     name: "Anel Ajustável com Dois Círculos Lisos Geométrico – Aço Inox (Não escurece)",
     category: "Anéis",
     image: "https://cf.shopee.com.br/file/br-11134207-820mb-mlcrrc5mhix14c",
@@ -434,6 +477,7 @@ const products: Array<Product> = [
   },
   {
     id: 58255895593,
+    stock: 2,
     name: "Brinco Ponto de Luz Zircônia Cristal Redondo Prateado Brilhante - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820mc-ml8m2ndrrrph34",
@@ -444,6 +488,7 @@ const products: Array<Product> = [
   },
   {
     id: 58255895027,
+    stock: 2,
     name: "Brinco Feminino Símbolo Infinito Prateado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820ld-ml8nipd1xpfr2f",
@@ -454,6 +499,7 @@ const products: Array<Product> = [
   },
   {
     id: 58255892038,
+    stock: 2,
     name: "Brinco de Flor Cravejada Prateado Delicado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lg-ml8m7fdm1mva0b",
@@ -464,6 +510,7 @@ const products: Array<Product> = [
   },
   {
     id: 58255891293,
+    stock: 2,
     name: "Brinco Feminino Formato Laço Delicado Prateado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820l4-ml6pnaumanly28",
@@ -474,6 +521,7 @@ const products: Array<Product> = [
   },
   {
     id: 58255888894,
+    stock: 3,
     name: "Brinco de Lua Crescente Delicado Minimalista Feminino Prateado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820ls-ml6pdpy13x8l99",
@@ -484,6 +532,7 @@ const products: Array<Product> = [
   },
   {
     id: 58255888146,
+    stock: 2,
     name: "Brinco Ponto de Luz Redondo Rosa Escuro Cravejado – Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820mb-ml8n08ju93if18",
@@ -494,6 +543,7 @@ const products: Array<Product> = [
   },
   {
     id: 58255846300,
+    stock: 1,
     name: "Bracelete Fino Liso Minimalista Rígido – Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-81zun-ml5iv0g3bf2e59",
@@ -504,6 +554,7 @@ const products: Array<Product> = [
   },
   {
     id: 58255845885,
+    stock: 0,
     name: "Brinco Ponto de Luz Redondo Verde Esmeralda Cravejado – Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81ztu-ml5eoplxtudj15",
@@ -514,6 +565,7 @@ const products: Array<Product> = [
   },
   {
     id: 58255836782,
+    stock: 0,
     name: "Anel de Coroa Ajustável Minimalista Prateado – Aço Inox (Não escurece)",
     category: "Anéis",
     image: "https://cf.shopee.com.br/file/br-11134201-820m2-mqyp8t5vssufe4",
@@ -524,6 +576,7 @@ const products: Array<Product> = [
   },
   {
     id: 58255835886,
+    stock: 946,
     name: "Brinco Feminino 1º Furo + Hélix com Corrente e Pontos de Luz (1 lado) + ponto de luz (1 lado) – Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81zul-ml5d1r8m4dmsd9",
@@ -534,6 +587,7 @@ const products: Array<Product> = [
   },
   {
     id: 58255833104,
+    stock: 950,
     name: "Pulseira Feminina Prateada com Pontos de Luz Coloridos – Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-81ztk-ml5doihf50cla1",
@@ -544,6 +598,7 @@ const products: Array<Product> = [
   },
   {
     id: 58251446462,
+    stock: 0,
     name: "Pulseira Corrente Elos Ovais Dourada - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhtkksp3vev61d",
@@ -554,6 +609,7 @@ const products: Array<Product> = [
   },
   {
     id: 58251379473,
+    stock: 0,
     name: "Brinco de Argola Dourado - Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhsahrzzq6td2c",
@@ -564,6 +620,7 @@ const products: Array<Product> = [
   },
   {
     id: 58251322500,
+    stock: 0,
     name: "Argola Grossa Coração Dourado Elegante - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqtm6bndix270",
@@ -574,6 +631,7 @@ const products: Array<Product> = [
   },
   {
     id: 58251321505,
+    stock: 0,
     name: "Pulseira Fio Duplo com Chapas Redondas Douradas - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqsah7a2cxu4e",
@@ -584,6 +642,7 @@ const products: Array<Product> = [
   },
   {
     id: 58251316542,
+    stock: 2,
     name: "Colar Dourado ou Prateado Pingente Flor Orgânica Pérola Cultivada – Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqrv2f8yewz5a",
@@ -594,6 +653,7 @@ const products: Array<Product> = [
   },
   {
     id: 58251314407,
+    stock: 0,
     name: "Conjunto de Colares Duplos Coração com Detalhe Bolinhas Dourado - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhql1p3ct4ht17",
@@ -604,6 +664,7 @@ const products: Array<Product> = [
   },
   {
     id: 58251308888,
+    stock: 0,
     name: "Brinco de Argola Dourada com Pingente Trevo de Quatro Folhas Branco - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqki842h4oyfd",
@@ -614,6 +675,7 @@ const products: Array<Product> = [
   },
   {
     id: 58251306098,
+    stock: 0,
     name: "Conjunto de Pulseiras Duplas Fio Snake e Trevo Madrepérola Dourado - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820md-mljybt8ehlad7a",
@@ -624,6 +686,7 @@ const products: Array<Product> = [
   },
   {
     id: 58251305301,
+    stock: 0,
     name: "Conjunto de Colares Duplos Fio Snake e Coração Dourado - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqifwmif8qu36",
@@ -634,6 +697,7 @@ const products: Array<Product> = [
   },
   {
     id: 58214258624,
+    stock: 8,
     name: "Piercing de Orelha Hélix Reto com Pingente de Cruz Lisa - Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134201-820lm-mqx54ukjad536d",
@@ -644,6 +708,7 @@ const products: Array<Product> = [
   },
   {
     id: 58214254540,
+    stock: 8,
     name: "Piercing de Orelha Hélix Reto com Pingente de Laço Delicado - Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lb-mqntgjvtowlf14",
@@ -654,6 +719,7 @@ const products: Array<Product> = [
   },
   {
     id: 58214254436,
+    stock: 1,
     name: "alterar brinco",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lt-mqnu0v7qzfnn64",
@@ -664,6 +730,7 @@ const products: Array<Product> = [
   },
   {
     id: 58213871858,
+    stock: 1,
     name: "Colar Delicado Feminino Pingente Mini Coração Verde Esmeralda - Aço Inox (Não Escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820lf-mqdqjq83kiyp0a",
@@ -674,6 +741,7 @@ const products: Array<Product> = [
   },
   {
     id: 58213868008,
+    stock: 1,
     name: "Colar Feminino  Pingente Coração Roxo  - Aço Inox (Não Escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820l8-mqdqjq7n2dj607",
@@ -684,6 +752,7 @@ const products: Array<Product> = [
   },
   {
     id: 58213862483,
+    stock: 2,
     name: "Pulseira ou Tornozeleira com Bolinhas - Aço Inox (Não Escurece)",
     category: "Tornozeleiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820lh-mqdqjq7my5tu66",
@@ -694,6 +763,7 @@ const products: Array<Product> = [
   },
   {
     id: 58213861046,
+    stock: 1,
     name: "Colar Feminino Corrente de Elos Formato Coração Vazado - Aço Inox (Não Escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820l7-mqdqjq7mvcoy95",
@@ -704,6 +774,7 @@ const products: Array<Product> = [
   },
   {
     id: 58213860764,
+    stock: 1,
     name: "Colar Feminino Corrente Fina com Pingente Coração Cristal - Aço Inox (Não Escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820le-mqdqjq7mty4i36",
@@ -714,6 +785,7 @@ const products: Array<Product> = [
   },
   {
     id: 58213860578,
+    stock: 1,
     name: "Pulseira de Elos de Borboletas - Aço Inox (Não Escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820md-mqdqjq7msjk249",
@@ -724,6 +796,7 @@ const products: Array<Product> = [
   },
   {
     id: 58213856606,
+    stock: 1,
     name: "Colar Feminino Delicado com Bolinhas - Aço Inox (Não Escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820l6-mqdqjq83gb9d61",
@@ -734,6 +807,7 @@ const products: Array<Product> = [
   },
   {
     id: 58213853319,
+    stock: 1,
     name: "Colar Feminino Pingente Gota Vermelha Ponto de Luz - Aço Inox (Não Escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820l7-mqdqjq7mwr9e72",
@@ -744,6 +818,7 @@ const products: Array<Product> = [
   },
   {
     id: 58213475499,
+    stock: 1,
     name: "Argola Retangular Fina Minimalista Grande - Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820l9-mqcf1gjmf400d7",
@@ -754,6 +829,7 @@ const products: Array<Product> = [
   },
   {
     id: 58213474052,
+    stock: 1,
     name: "Pulseira Berloque com Pingente Medalha Madrepérola de Pet: Patinha - Aço Inox (Não Escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820m5-mqcf1gjmcav4c4",
@@ -764,6 +840,7 @@ const products: Array<Product> = [
   },
   {
     id: 58213473781,
+    stock: 2,
     name: "Bracelete Aberto Aro Rígido com Duas Pérolas - Aço Inox (Não Escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820m1-mq7nq9odheddc9",
@@ -774,6 +851,7 @@ const products: Array<Product> = [
   },
   {
     id: 58213460203,
+    stock: 1,
     name: "Pulseira de Elos Retangulares Com Dois Corações - Aço Inox (Não Escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820mh-mq7nhb74z85f65",
@@ -784,6 +862,7 @@ const products: Array<Product> = [
   },
   {
     id: 58213460156,
+    stock: 0,
     name: "Bracelete Aberto Trevo de Quatro Folhas Preto - Aço Inox (Não Escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820m0-mq7nhb74xtkz47",
@@ -794,6 +873,7 @@ const products: Array<Product> = [
   },
   {
     id: 58213454217,
+    stock: 4,
     name: "Brinco Riviera com Pedras de Zircônia Coloridas - Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820ll-mq7nq9odel8h81",
@@ -804,6 +884,7 @@ const products: Array<Product> = [
   },
   {
     id: 58213454073,
+    stock: 1,
     name: "Pulseira Berloque com Pingente Medalha Pet: Gato - Aço Inox (Não Escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820l7-mq7nyucumlfn0f",
@@ -814,6 +895,7 @@ const products: Array<Product> = [
   },
   {
     id: 58211066229,
+    stock: 0,
     name: "Pulseira Feminina Elos com Pingente Trevo Preto Elegante Moderna Estilo Luxury - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820mc-moh22z6skw7944",
@@ -824,6 +906,7 @@ const products: Array<Product> = [
   },
   {
     id: 58211048566,
+    stock: 1,
     name: "Brinco Feminino Longo Ondulado com Corrente Minimalista Moderno Elegante  - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lw-moh22z6zkbuudc",
@@ -834,6 +917,7 @@ const products: Array<Product> = [
   },
   {
     id: 58210984401,
+    stock: 1,
     name: "Pulseira Feminina Riviera Prata com Zircônias Brilhantes Delicada Elegante Ajustável - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820m5-mofseziswkjpf3",
@@ -844,6 +928,7 @@ const products: Array<Product> = [
   },
   {
     id: 58210603291,
+    stock: 0,
     name: "Brinco Feminino Pêndulo com Pedra Redonda Verde Esmeralda Brilhante Design Elegante e Delicado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820ls-mo6z0z1ls2dde7",
@@ -854,6 +939,7 @@ const products: Array<Product> = [
   },
   {
     id: 58210040612,
+    stock: 2,
     name: "Brinco Feminino Trio de Elos Entrelaçados Dourado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lz-mnsx2pnrsfes0f",
@@ -864,6 +950,7 @@ const products: Array<Product> = [
   },
   {
     id: 58210034170,
+    stock: 2,
     name: "Brinco Orgânico Feminino  Martelado Dourado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lf-mnsx2pnpg5c039",
@@ -874,6 +961,7 @@ const products: Array<Product> = [
   },
   {
     id: 58209946142,
+    stock: 22,
     name: "Pulseira Feminina Prateada de Elos com Pontos de Luz  - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820li-mo4og8apvg1u6c",
@@ -884,6 +972,7 @@ const products: Array<Product> = [
   },
   {
     id: 58209809763,
+    stock: 2,
     name: "Brinco Orgânico Feminino Ondulado Dourado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820l7-mnm5cp3wr9c27b",
@@ -894,6 +983,7 @@ const products: Array<Product> = [
   },
   {
     id: 58209771081,
+    stock: 95,
     name: "Pulseira Feminina Prateada de Elos com Pontos de Luz Azul - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820lx-mnlmgwp9skjm03",
@@ -904,6 +994,7 @@ const products: Array<Product> = [
   },
   {
     id: 58209524858,
+    stock: 0,
     name: "Colar Corrente Prata com 5 Pérolas Grandes - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820lz-mnfyf3rei875f8",
@@ -914,6 +1005,7 @@ const products: Array<Product> = [
   },
   {
     id: 58209487288,
+    stock: 0,
     name: "Anel Ajustável Sete Elos Dourado - Aço Inox (Não escurece)",
     category: "Anéis",
     image: "https://cf.shopee.com.br/file/br-11134207-820ln-mnf2hz1v68ldea",
@@ -924,6 +1016,7 @@ const products: Array<Product> = [
   },
   {
     id: 58207797364,
+    stock: 1,
     name: "Pulseira Corrente Elos com Pingente Trevo da Sorte - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820lx-mmcbo6t801kw28",
@@ -934,6 +1027,7 @@ const products: Array<Product> = [
   },
   {
     id: 58207750791,
+    stock: 0,
     name: "Anel Ajustável Dupla Pérola Minimalista - Aço Inox (Não escurece)",
     category: "Anéis",
     image: "https://cf.shopee.com.br/file/br-11134207-820lp-mmb9nnyd416v34",
@@ -944,6 +1038,7 @@ const products: Array<Product> = [
   },
   {
     id: 58207750569,
+    stock: 34,
     name: "Anel com Pérola Minimalista - Aço Inox (Não escurece)",
     category: "Anéis",
     image: "https://cf.shopee.com.br/file/br-11134207-820lv-mmb9nnycyex339",
@@ -954,6 +1049,7 @@ const products: Array<Product> = [
   },
   {
     id: 58207521805,
+    stock: 1,
     name: "Brinco Pequeno de Bolinha Lisa - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820md-mmb8o2ygl4w44d",
@@ -964,6 +1060,7 @@ const products: Array<Product> = [
   },
   {
     id: 58207520664,
+    stock: 1,
     name: "Brinco Ponto de Luz Azul Royal Pendente - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lu-mm9b3x6n5gxya7",
@@ -974,6 +1071,7 @@ const products: Array<Product> = [
   },
   {
     id: 58207518312,
+    stock: 3,
     name: "Brinco Geométrico Quadrado Vazado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lb-mm9avomlbw1wfd",
@@ -984,6 +1082,7 @@ const products: Array<Product> = [
   },
   {
     id: 58206542718,
+    stock: 0,
     name: "Pulseira Trevo com Resina Preta e Elos Delicados - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820lz-mlkzut3wne9xee",
@@ -994,6 +1093,7 @@ const products: Array<Product> = [
   },
   {
     id: 58206258605,
+    stock: 2,
     name: "Brinco Duplo Pérola com Corrente - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lz-mlffln7q7pqe72",
@@ -1004,6 +1104,7 @@ const products: Array<Product> = [
   },
   {
     id: 58206256285,
+    stock: 1,
     name: "Brinco Coração Vazado Diamantado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820ld-mlfetibjndom6f",
@@ -1014,6 +1115,7 @@ const products: Array<Product> = [
   },
   {
     id: 58206255484,
+    stock: 0,
     name: "Colar Pingente Concha Marítima - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820m9-mlfeemuzgq9w60",
@@ -1024,6 +1126,7 @@ const products: Array<Product> = [
   },
   {
     id: 58206123355,
+    stock: 1,
     name: "Argola Grande Ondulada Moderna - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lb-mlctag1efjt249",
@@ -1034,6 +1137,7 @@ const products: Array<Product> = [
   },
   {
     id: 58206119084,
+    stock: 0,
     name: "Brinco Argola Quadrada Média Design Geométrico – Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lo-mlcrrc5r1vd080",
@@ -1044,6 +1148,7 @@ const products: Array<Product> = [
   },
   {
     id: 58205905452,
+    stock: 0,
     name: "Brinco Feminino Flor Vazada 4 Pétalas Prateado Delicado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820m8-ml8mi5uxcyrofc",
@@ -1054,6 +1159,7 @@ const products: Array<Product> = [
   },
   {
     id: 58205904011,
+    stock: 0,
     name: "Pulseira Feminina Elos com Pingentes de Pérolas Delicada Prateada - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820li-ml8n08ju22o7fe",
@@ -1064,6 +1170,7 @@ const products: Array<Product> = [
   },
   {
     id: 58205902029,
+    stock: 3,
     name: "Brinco de Estrela Delicado Minimalista Feminino Prateado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820ll-ml6pdpxy7z7ra7",
@@ -1074,6 +1181,7 @@ const products: Array<Product> = [
   },
   {
     id: 58205899600,
+    stock: 3,
     name: "Brinco Borboleta Cravejada Prateado Delicado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lf-ml8mstw5q2h1bc",
@@ -1084,6 +1192,7 @@ const products: Array<Product> = [
   },
   {
     id: 58205846488,
+    stock: 0,
     name: "Brinco Earcuff Curvado Zircônias (1 Lado) + Ponto de Luz (outro Lado) – Aço",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81zun-ml5d1r8lrqis65",
@@ -1094,6 +1203,7 @@ const products: Array<Product> = [
   },
   {
     id: 58205842147,
+    stock: 1,
     name: "Pulseira Dupla Corrente Elo Português e Pérolas – Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820m2-ml8nipd20ikn4d",
@@ -1104,6 +1214,7 @@ const products: Array<Product> = [
   },
   {
     id: 58201608946,
+    stock: 0,
     name: "Colar Pingente Gota Cravejada e Corrente Fio Elos Dourado – Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhz5n31t5wch0e",
@@ -1114,6 +1225,7 @@ const products: Array<Product> = [
   },
   {
     id: 58201385128,
+    stock: 0,
     name: "Brinco quadrado - Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhsbp6drs7ia57",
@@ -1124,6 +1236,7 @@ const products: Array<Product> = [
   },
   {
     id: 58201374956,
+    stock: 0,
     name: "Brinco de Argola Tripla Entrelaçada Dourada - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhs48ynnxa12cf",
@@ -1134,6 +1247,7 @@ const products: Array<Product> = [
   },
   {
     id: 58201322966,
+    stock: 0,
     name: "Pulseira Dupla Fio de Cobra com Discos Minimalista Prateada – Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqrv2f9b20z79",
@@ -1144,6 +1258,7 @@ const products: Array<Product> = [
   },
   {
     id: 58201322469,
+    stock: 0,
     name: "Pulseira Feminina de Flor Delicada Corrente Fina Dourada - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqrhriramme65",
@@ -1154,6 +1269,7 @@ const products: Array<Product> = [
   },
   {
     id: 58201322203,
+    stock: 1,
     name: "Brinco Feminino Trevo de Quatro Folhas Branco e Dourado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqr4sn0yghu32",
@@ -1164,6 +1280,7 @@ const products: Array<Product> = [
   },
   {
     id: 58201320777,
+    stock: 0,
     name: "Brinco de Argola Tripla Dourada Moderno (Três Aros Interligados) - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqo3mzugao3d0",
@@ -1174,6 +1291,7 @@ const products: Array<Product> = [
   },
   {
     id: 58201318848,
+    stock: 0,
     name: "Pulseira Delicada com Pingentes de Borboleta Madrepérola (Dupla Camada) - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqu39honhfn59",
@@ -1184,6 +1302,7 @@ const products: Array<Product> = [
   },
   {
     id: 58201318538,
+    stock: 1,
     name: "Pulseira Feminina Delicada Malha Corrente Dourada - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqu39hohv5v3d",
@@ -1194,6 +1313,7 @@ const products: Array<Product> = [
   },
   {
     id: 58201316906,
+    stock: 1,
     name: "Brinco Pequeno de Coração Duplo Vazado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqof33h0nibe4",
@@ -1204,6 +1324,7 @@ const products: Array<Product> = [
   },
   {
     id: 58201315170,
+    stock: 0,
     name: "Brinco Pequeno Trevo de Quatro Folhas Liso Dourado Minimalista - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqnpr8iudxe54",
@@ -1214,6 +1335,7 @@ const products: Array<Product> = [
   },
   {
     id: 58201305917,
+    stock: 0,
     name: "Brinco Argola Tubular Dourada de Três Fios - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqifwmi9mh2ee",
@@ -1224,6 +1346,7 @@ const products: Array<Product> = [
   },
   {
     id: 23999003510,
+    stock: 0,
     name: "Trio de Brincos com Pedras Coloridas - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfovkwg2st1c1f",
@@ -1234,6 +1357,7 @@ const products: Array<Product> = [
   },
   {
     id: 23998973774,
+    stock: 0,
     name: "Escapulário Unissex - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfh29o3t8kqs8b",
@@ -1244,6 +1368,7 @@ const products: Array<Product> = [
   },
   {
     id: 23994693438,
+    stock: 2,
     name: "Brinco de Argola Oval Liso - Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhsbp6drjs3ma1",
@@ -1254,6 +1379,7 @@ const products: Array<Product> = [
   },
   {
     id: 23994692881,
+    stock: 0,
     name: "Pulseira Delicada com Pingentes de Coração Madrepérola Prateada - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqof33go0eb33",
@@ -1264,6 +1390,7 @@ const products: Array<Product> = [
   },
   {
     id: 23994507035,
+    stock: 0,
     name: "Brinco Argola Média/Grande Básica - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfoub35lufpj5d",
@@ -1274,6 +1401,7 @@ const products: Array<Product> = [
   },
   {
     id: 23899019743,
+    stock: 1,
     name: "Brinco Helix de Raio e Bolinha com Corrente (1 lado) e Bolinha (outro lado) Delicado – Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfw3trqxm0av17",
@@ -1284,6 +1412,7 @@ const products: Array<Product> = [
   },
   {
     id: 23899002902,
+    stock: 0,
     name: "Brinco Mini Cruz - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfoxvxjg464k5c",
@@ -1294,6 +1423,7 @@ const products: Array<Product> = [
   },
   {
     id: 23898981496,
+    stock: 0,
     name: "Gargantilha Lisa - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfn1x3syd05h01",
@@ -1304,6 +1434,7 @@ const products: Array<Product> = [
   },
   {
     id: 23898978549,
+    stock: 0,
     name: "Corrente com Bolinhas - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfl6swe7j5z404",
@@ -1314,6 +1445,7 @@ const products: Array<Product> = [
   },
   {
     id: 23798987786,
+    stock: 0,
     name: "Trio Brincos de Cruz - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfoub35lm0av1f",
@@ -1324,6 +1456,7 @@ const products: Array<Product> = [
   },
   {
     id: 23798985413,
+    stock: 0,
     name: "Gargantilha Torcida Delicada - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mg1kttzf8kcl98",
@@ -1334,6 +1467,7 @@ const products: Array<Product> = [
   },
   {
     id: 23794868232,
+    stock: 2,
     name: "Pulseira com Pingente de Pet Gato, Patinha e Coração Minimalista – Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820lt-ml9llj9fisjr73",
@@ -1344,6 +1478,7 @@ const products: Array<Product> = [
   },
   {
     id: 23794514103,
+    stock: 0,
     name: "Conjunto de Colar e Brinco de Coração Verde - Aço Inox (Não escurece)",
     category: "Conjuntos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mg1jj9lqurd181",
@@ -1354,6 +1489,7 @@ const products: Array<Product> = [
   },
   {
     id: 23698987715,
+    stock: 0,
     name: "Brinco com 3 Argolas com Ponto de Luz - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfoph01w5m9xaf",
@@ -1364,6 +1500,7 @@ const products: Array<Product> = [
   },
   {
     id: 23694916001,
+    stock: 0,
     name: "Brinco Ear Cuff Corações Vazados Crescente - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820me-mm9c1bhtkzyca2",
@@ -1374,6 +1511,7 @@ const products: Array<Product> = [
   },
   {
     id: 23694702074,
+    stock: 1,
     name: "Brinco Pequeno em Formato de Flor Branca - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqtpzvnzh1d2b",
@@ -1384,6 +1522,7 @@ const products: Array<Product> = [
   },
   {
     id: 23694518316,
+    stock: 0,
     name: "Terço Tradicional de Fé e Proteção – Aço Inox (Não escurece)",
     category: "Outros",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfsik19lmg3k5c",
@@ -1394,6 +1533,7 @@ const products: Array<Product> = [
   },
   {
     id: 23694514813,
+    stock: 0,
     name: "Colar de Coração Duplo - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfovkwfys4jrbf",
@@ -1404,6 +1544,7 @@ const products: Array<Product> = [
   },
   {
     id: 23599011475,
+    stock: 0,
     name: "Brinco Argola Tripla - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfoub35lx8uf23",
@@ -1414,6 +1555,7 @@ const products: Array<Product> = [
   },
   {
     id: 23598985562,
+    stock: 0,
     name: "Brinco Pequeno de Cruz - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfn1jhwuku8582",
@@ -1424,6 +1566,7 @@ const products: Array<Product> = [
   },
   {
     id: 23595031599,
+    stock: 1,
     name: "Pulseira Feminina de Elos Formato Coração Vazado - Aço Inox (Não Escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134201-820m2-mqx3em62016u6f",
@@ -1434,6 +1577,7 @@ const products: Array<Product> = [
   },
   {
     id: 23594538344,
+    stock: 0,
     name: "Brinco Duplo com Pedra Prata - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mg1kttzexbt1e2",
@@ -1444,6 +1588,7 @@ const products: Array<Product> = [
   },
   {
     id: 23594514885,
+    stock: 0,
     name: "Corrente Unissex - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfoub35lrmkn33",
@@ -1454,6 +1599,7 @@ const products: Array<Product> = [
   },
   {
     id: 23594514758,
+    stock: 0,
     name: "Brinco Argola Tripla - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfoub35lotfrdf",
@@ -1464,6 +1610,7 @@ const products: Array<Product> = [
   },
   {
     id: 23594460257,
+    stock: 0,
     name: "Colar com Pingente de Laço - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfk8u6y4w35z66",
@@ -1474,6 +1621,7 @@ const products: Array<Product> = [
   },
   {
     id: 23594460096,
+    stock: 0,
     name: "Brinco com Strass e Pedra Verde - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfk8cgd0rnk050",
@@ -1484,6 +1632,7 @@ const products: Array<Product> = [
   },
   {
     id: 23499006248,
+    stock: 0,
     name: "Pulseira de Flor - Aço Inox (não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mf906sbnmtxh4c",
@@ -1494,6 +1643,7 @@ const products: Array<Product> = [
   },
   {
     id: 23495063818,
+    stock: 1,
     name: "Colar Feminino de Corrente Fina com Pingente de Coroa Vazada - Aço Inox (Não Escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820ls-mqnu0v7qwmirbb",
@@ -1504,6 +1654,7 @@ const products: Array<Product> = [
   },
   {
     id: 23494866925,
+    stock: 2,
     name: "Brinco Trio de Corações Minimalista - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820m5-mlfh616ymsjqb3",
@@ -1514,6 +1665,7 @@ const products: Array<Product> = [
   },
   {
     id: 23494512664,
+    stock: 0,
     name: "Brinco de Argola Médio - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfn1jhwup1xh5b",
@@ -1524,6 +1676,7 @@ const products: Array<Product> = [
   },
   {
     id: 23399524903,
+    stock: 1,
     name: "Tornozeleira Minimalista Trevo da Sorte - Aço Inox (Não Escurece)",
     category: "Tornozeleiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820lm-mq7nhb753fur8e",
@@ -1534,6 +1687,7 @@ const products: Array<Product> = [
   },
   {
     id: 23399011531,
+    stock: 1,
     name: "Brinco Vazado Texturizado Feminino - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lb-mlctag1el62ub2",
@@ -1544,6 +1698,7 @@ const products: Array<Product> = [
   },
   {
     id: 23394704409,
+    stock: 0,
     name: "Conjunto de Borboleta Delicada Colar e Brinco Dourado – Aço Inox (Não escurece)",
     category: "Conjuntos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhz5n31sqg3l6e",
@@ -1554,6 +1709,7 @@ const products: Array<Product> = [
   },
   {
     id: 23394486017,
+    stock: 0,
     name: "Conjunto Colar e Brinco de Trevo Verde - Aço Inox (Não escurece)",
     category: "Conjuntos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfhghaqgvhtwce",
@@ -1564,6 +1720,7 @@ const products: Array<Product> = [
   },
   {
     id: 23299369940,
+    stock: 0,
     name: "Anel Ajustável Duas Estrelas Cravejadas em Zircônia – Aço Inox (Não escurece)",
     category: "Anéis",
     image: "https://cf.shopee.com.br/file/br-11134207-820m7-mlcrrc5mvklh94",
@@ -1574,6 +1731,7 @@ const products: Array<Product> = [
   },
   {
     id: 23299000664,
+    stock: 0,
     name: "Pulseira de Borboletas Coloridas - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfk8cgd0nfuo26",
@@ -1584,6 +1742,7 @@ const products: Array<Product> = [
   },
   {
     id: 23295033411,
+    stock: 1,
     name: "Pulseira de Elos Ovais com Pingente de Coração Vazado - Aço Inox (Não Escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820ma-mqcf1gjmgikg01",
@@ -1594,6 +1753,7 @@ const products: Array<Product> = [
   },
   {
     id: 23294509121,
+    stock: 0,
     name: "Colar com Pedra Preta - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfk8cgd0j85cd1",
@@ -1604,6 +1764,7 @@ const products: Array<Product> = [
   },
   {
     id: 23199005796,
+    stock: 0,
     name: "Bracelete Símbolo do Infinito - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfk8cgd0f0g0fb",
@@ -1614,6 +1775,7 @@ const products: Array<Product> = [
   },
   {
     id: 22899441688,
+    stock: 35,
     name: "Colar de Filhos Personalizado Corrente Elo Português - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820lz-mnercnojzh1ef0",
@@ -1624,6 +1786,7 @@ const products: Array<Product> = [
   },
   {
     id: 22699386327,
+    stock: 0,
     name: "Colar Pingente Medalha Ondulada - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820m5-mlfetibjym8652",
@@ -1634,6 +1797,7 @@ const products: Array<Product> = [
   },
   {
     id: 22699371434,
+    stock: 1,
     name: "Colar Corrente Delicada Minimalista Coração Verde Esmeralda - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820md-mlctag1nwvt31a",
@@ -1644,6 +1808,7 @@ const products: Array<Product> = [
   },
   {
     id: 22699060477,
+    stock: 190,
     name: "Pulseira de Miçangas com Nome Personalizado | Escolha a Cor da Miçanga | Consulte Cor do Pingente no Chat",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mg5r9o1dn3t177",
@@ -1654,6 +1819,7 @@ const products: Array<Product> = [
   },
   {
     id: 22694531230,
+    stock: 1,
     name: "Conjunto de Colar e Brinco em Pedra com Formato de Coração   - Aço Inox (Não escurece)",
     category: "Conjuntos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfogkujaht6vce",
@@ -1664,6 +1830,7 @@ const products: Array<Product> = [
   },
   {
     id: 22599545392,
+    stock: 1,
     name: "Brinco Argola Média Feminina Textura Trançada Grossa - Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820m6-mqdqjq83nc3l8e",
@@ -1674,6 +1841,7 @@ const products: Array<Product> = [
   },
   {
     id: 22598997584,
+    stock: 0,
     name: "Brinco de Pedra Incolor Brilhante - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfldspie4dms37",
@@ -1684,6 +1852,7 @@ const products: Array<Product> = [
   },
   {
     id: 22594551106,
+    stock: 0,
     name: "Colar com Pingente de Pedra em Formato de Coração - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mg1luvpf2znp48",
@@ -1695,6 +1864,7 @@ const products: Array<Product> = [
   },
   {
     id: 22499545380,
+    stock: 1,
     name: "Tornozeleira Coração Vazado com Ponto de Luz - Aço Inox (Não Escurece)",
     category: "Tornozeleiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820mg-mqdqjq7n0yyq00",
@@ -1705,6 +1875,7 @@ const products: Array<Product> = [
   },
   {
     id: 22499047813,
+    stock: 0,
     name: "Brinco de Argola de Coração Feminino - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mg1jj9lqkxdxa8",
@@ -1715,6 +1886,7 @@ const products: Array<Product> = [
   },
   {
     id: 22499022388,
+    stock: 0,
     name: "Brinco Coração com Corrente - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfonbf6qe8edc6",
@@ -1725,6 +1897,7 @@ const products: Array<Product> = [
   },
   {
     id: 22499022201,
+    stock: 0,
     name: "Trio de Brincos Ponto de Luz - Aço Inox (não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfonbf6qbf9h4b",
@@ -1735,6 +1908,7 @@ const products: Array<Product> = [
   },
   {
     id: 22494712448,
+    stock: 0,
     name: "Brinco Oval Duplo Prateado ou Dourado - Aço Inox (Não Escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhsahs00uxae5f",
@@ -1745,6 +1919,7 @@ const products: Array<Product> = [
   },
   {
     id: 22399048011,
+    stock: 0,
     name: "Kit 3 Brincos de Coração para 3 Furos - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mg1iyukiiz2f5b",
@@ -1755,6 +1930,7 @@ const products: Array<Product> = [
   },
   {
     id: 22398997740,
+    stock: 0,
     name: "Corrente Delicada com Mini Bolinhas - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820lu-mlffln7q23gm62",
@@ -1765,6 +1941,7 @@ const products: Array<Product> = [
   },
   {
     id: 22394551341,
+    stock: 0,
     name: "Pulseira com Cadeado e Chave Prata - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mg1iyukalts518",
@@ -1775,6 +1952,7 @@ const products: Array<Product> = [
   },
   {
     id: 22394501103,
+    stock: 0,
     name: "Conjunto Colar e Brinco Redondo Plissado - Aço Inox (Não escurece)",
     category: "Conjuntos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfl6swehodmof8",
@@ -1785,6 +1963,7 @@ const products: Array<Product> = [
   },
   {
     id: 22299469859,
+    stock: 3,
     name: "Brinco Maxxi Argolas Entrelaçadas Orgânico Dourado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820mf-mnf2hz1v4u0xfe",
@@ -1795,6 +1974,7 @@ const products: Array<Product> = [
   },
   {
     id: 22299421167,
+    stock: 1,
     name: "Brinco de Borboleta Vazada Delicada - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820lt-mmb8o2zc9q0wd9",
@@ -1805,6 +1985,7 @@ const products: Array<Product> = [
   },
   {
     id: 22299010820,
+    stock: 0,
     name: "Pulseira Feminina Elos com 6 Pingentes de Cristais Coloridos  - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfl6swehlkhs05",
@@ -1815,6 +1996,7 @@ const products: Array<Product> = [
   },
   {
     id: 22294725371,
+    stock: 0,
     name: "Argola Pequena com Pingente Flor Cravejada - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhqsts0n6e4h32",
@@ -1825,6 +2007,7 @@ const products: Array<Product> = [
   },
   {
     id: 22199405492,
+    stock: 0,
     name: "Colar Delicado Corrente Elos com Mini Coração Brilhante – Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-820ld-mlcrrc5qgsuf6c",
@@ -1835,6 +2018,7 @@ const products: Array<Product> = [
   },
   {
     id: 22199011419,
+    stock: 0,
     name: "Brinco de Argola com Estrelas - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfldspibqozr7c",
@@ -1845,6 +2029,7 @@ const products: Array<Product> = [
   },
   {
     id: 22194514886,
+    stock: 0,
     name: "Brinco de Asa - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfldspibnvuv9d",
@@ -1855,6 +2040,7 @@ const products: Array<Product> = [
   },
   {
     id: 22194509122,
+    stock: 2,
     name: "Pulseira Delicada de Elos Circulares com Cristais Furta-cor - Aço Inox (Não escurece)",
     category: "Pulseiras",
     image: "https://cf.shopee.com.br/file/br-11134207-820ln-mlctag1nzoxzb1",
@@ -1865,6 +2051,7 @@ const products: Array<Product> = [
   },
   {
     id: 22099011593,
+    stock: 0,
     name: "Colar com Pingente de Coração em Pedra Roxa - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfldspibl2pzc6",
@@ -1875,6 +2062,7 @@ const products: Array<Product> = [
   },
   {
     id: 22094999615,
+    stock: 0,
     name: "Brinco Feminino Pêndulo com Pedra Cristal Redonda Brilhante, Modelo Delicado - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-820l5-mo78ba0no4jk71",
@@ -1885,6 +2073,7 @@ const products: Array<Product> = [
   },
   {
     id: 22094747389,
+    stock: 0,
     name: "Brinco de Coração Pequeno Delicado Minimalista - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mhtkkspe91xe31",
@@ -1895,6 +2084,7 @@ const products: Array<Product> = [
   },
   {
     id: 22094520024,
+    stock: 1,
     name: "Brinco de Coração - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfldspibi9l3fc",
@@ -1905,6 +2095,7 @@ const products: Array<Product> = [
   },
   {
     id: 21799886234,
+    stock: 0,
     name: "Choker com Pedras Coloridas - Aço Inox (Não escurece)",
     category: "Colares",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfh88oh11edg8a",
@@ -1915,6 +2106,7 @@ const products: Array<Product> = [
   },
   {
     id: 21499897357,
+    stock: 0,
     name: "Brinco de Coração Duplo - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfonbf6mndvr92",
@@ -1925,6 +2117,7 @@ const products: Array<Product> = [
   },
   {
     id: 21399896880,
+    stock: 0,
     name: "Brinco de Argola - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mflos1hh651j84",
@@ -1935,6 +2128,7 @@ const products: Array<Product> = [
   },
   {
     id: 20799907011,
+    stock: 0,
     name: "Brinco Quadrado com Pedra Rosa – Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfw3trqxge1381",
@@ -1945,6 +2139,7 @@ const products: Array<Product> = [
   },
   {
     id: 20098322960,
+    stock: 0,
     name: "Brinco de Coração - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfoxvxjfzyf855",
@@ -1955,6 +2150,7 @@ const products: Array<Product> = [
   },
   {
     id: 19899896267,
+    stock: 0,
     name: "Brinco Ponto de Luz Azul - Aço Inox (Não escurece)",
     category: "Brincos",
     image: "https://cf.shopee.com.br/file/br-11134207-81z1k-mfoxi7v07bwl4b",

@@ -28,3 +28,10 @@ Para habilitar o checkout com Stripe, defina a variável de ambiente `STRIPE_SEC
 - `src/routes/products/$productId.tsx` — página de detalhe do produto
 - `public/products/` — imagens ilustrativas das peças
 - `public/images/trivelle-logo.png` — identidade visual da marca
+
+## Atualização do catálogo
+
+- Produtos com estoque 0 não aparecem no catálogo.
+- Para editar anúncios, acesse `/admin`.
+- No editor, altere título, preço, descrição, URLs das fotos ou marque o anúncio como oculto.
+- Clique em **Baixar alterações** e substitua `public/catalog-overrides.json` no GitHub; depois faça um commit para publicar.

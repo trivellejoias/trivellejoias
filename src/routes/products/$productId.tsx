@@ -1,17 +1,17 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 import products from '../../data/products'
 import { BuyButton } from '@/components/BuyButton'
+import { applyOverride, loadCatalogOverrides } from '@/lib/catalog'
 
 export const Route = createFileRoute('/products/$productId')({
   component: RouteComponent,
   loader: async ({ params }) => {
-    const product = products.find(
-      (product) => product.id === +params.productId,
-    )
-    if (!product) {
-      throw new Error('Product not found')
-    }
-    return product
+    const product = products.find((product) => product.id === +params.productId)
+    if (!product || product.stock <= 0) throw new Error('Product not found')
+    const overrides = await loadCatalogOverrides()
+    const merged = applyOverride(product, overrides)
+    if (merged.hidden) throw new Error('Product not found')
+    return merged
   },
 })
 
