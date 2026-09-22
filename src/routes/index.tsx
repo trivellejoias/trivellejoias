@@ -29,8 +29,8 @@ function ProductsIndex() {
 
   const filtered = useMemo(() => {
     const available = products
-      .filter((p) => p.stock > 0)
       .map((p) => applyOverride(p, overrides))
+      .filter((p) => (p.stock ?? 0) > 0)
       .filter((p) => !p.hidden)
     return activeCategory === 'Todos' ? available : available.filter((p) => p.category === activeCategory)
   }, [activeCategory, overrides])

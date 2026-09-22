@@ -7,10 +7,10 @@ export const Route = createFileRoute('/products/$productId')({
   component: RouteComponent,
   loader: async ({ params }) => {
     const product = products.find((product) => product.id === +params.productId)
-    if (!product || product.stock <= 0) throw new Error('Product not found')
+    if (!product) throw new Error('Product not found')
     const overrides = await loadCatalogOverrides()
     const merged = applyOverride(product, overrides)
-    if (merged.hidden) throw new Error('Product not found')
+    if (merged.hidden || (merged.stock ?? 0) <= 0) throw new Error('Product not found')
     return merged
   },
 })
