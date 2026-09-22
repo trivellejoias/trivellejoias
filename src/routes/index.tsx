@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, createFileRoute } from '@tanstack/react-router'
 import products, { type Product } from '@/data/products'
 import { BuyButton } from '@/components/BuyButton'
-import { applyOverride, loadCatalogOverrides, type CatalogOverrides } from '@/lib/catalog'
+import { applyOverride, loadCatalogOverrides, loadCatalogSettings, type CatalogOverrides, type CatalogSettings, whatsappHref } from '@/lib/catalog'
 
 export const Route = createFileRoute('/')({
   component: ProductsIndex,
@@ -21,7 +21,8 @@ const categories: Array<Product['category'] | 'Todos'> = [
 
 function ProductsIndex() {
   const [overrides, setOverrides] = useState<CatalogOverrides>({})
-  useEffect(() => { loadCatalogOverrides().then(setOverrides) }, [])
+  const [settings, setSettings] = useState<CatalogSettings>({ instagramUrl: 'https://www.instagram.com/trivellejoias/', whatsappNumber: '5519982124939', whatsappMessage: 'Olá! Vim pelo catálogo da Trivelle e gostaria de saber mais sobre as peças.' })
+  useEffect(() => { loadCatalogOverrides().then(setOverrides); loadCatalogSettings().then((s) => setSettings((prev) => ({ ...prev, ...s }))) }, [])
 
   const [activeCategory, setActiveCategory] = useState<
     (typeof categories)[number]
@@ -31,7 +32,7 @@ function ProductsIndex() {
     const available = products
       .map((p) => applyOverride(p, overrides))
       .filter((p) => (p.stock ?? 0) > 0)
-      .filter((p) => !p.hidden)
+      .filter((p) => !p.hidden && !p.deleted)
     return activeCategory === 'Todos' ? available : available.filter((p) => p.category === activeCategory)
   }, [activeCategory, overrides])
 
@@ -111,6 +112,15 @@ function ProductsIndex() {
         </div>
       </main>
 
+      <section className="max-w-5xl mx-auto px-6 pb-10">
+        <div className="rounded-3xl bg-[color:var(--color-brand-light)] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-5">
+          <div className="text-center md:text-left"><p className="font-display text-2xl">Fale com a Trivelle 💎</p><p className="text-sm opacity-70 mt-1">Acompanhe novidades ou fale com a gente pelo WhatsApp.</p></div>
+          <div className="flex flex-wrap justify-center gap-3">
+            {settings.instagramUrl && <a href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-white border border-[color:var(--color-brand)] text-sm font-medium">◎ Instagram</a>}
+            {settings.whatsappNumber && <a href={whatsappHref(settings.whatsappNumber, settings.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-[color:var(--color-brand-dark)] text-white text-sm font-medium">☏ WhatsApp</a>}
+          </div>
+        </div>
+      </section>
       <footer className="border-t border-[color:var(--color-brand-light)] py-10 text-center text-sm text-[color:var(--color-ink)]/60">
         © {new Date().getFullYear()} Trivelle — joias em aço inox que não escurecem.
       </footer>

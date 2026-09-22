@@ -1,7 +1,8 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
+import { useEffect, useState } from 'react'
 import products from '../../data/products'
 import { BuyButton } from '@/components/BuyButton'
-import { applyOverride, loadCatalogOverrides } from '@/lib/catalog'
+import { applyOverride, loadCatalogOverrides, loadCatalogSettings, type CatalogSettings, whatsappHref } from '@/lib/catalog'
 
 export const Route = createFileRoute('/products/$productId')({
   component: RouteComponent,
@@ -10,13 +11,15 @@ export const Route = createFileRoute('/products/$productId')({
     if (!product) throw new Error('Product not found')
     const overrides = await loadCatalogOverrides()
     const merged = applyOverride(product, overrides)
-    if (merged.hidden || (merged.stock ?? 0) <= 0) throw new Error('Product not found')
+    if (merged.hidden || merged.deleted || (merged.stock ?? 0) <= 0) throw new Error('Product not found')
     return merged
   },
 })
 
 function RouteComponent() {
   const product = Route.useLoaderData()
+  const [settings, setSettings] = useState<CatalogSettings>({ instagramUrl: 'https://www.instagram.com/trivellejoias/', whatsappNumber: '5519982124939', whatsappMessage: 'Olá! Vim pelo catálogo da Trivelle e gostaria de saber mais sobre as peças.' })
+  useEffect(() => { loadCatalogSettings().then((s) => setSettings((prev) => ({ ...prev, ...s }))) }, [])
 
   return (
     <div className="min-h-screen bg-[#fffdfc]">
@@ -75,6 +78,16 @@ function RouteComponent() {
           <p className="mt-6 text-xs text-[color:var(--color-ink)]/50">
             Aço inoxidável hipoalergênico · não escurece · resistente à água
           </p>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 pb-14">
+        <div className="rounded-3xl bg-[color:var(--color-brand-light)] p-6 flex flex-wrap items-center justify-between gap-4">
+          <div><p className="font-display text-xl">Gostou da peça?</p><p className="text-sm opacity-70">Fale com a Trivelle ou acompanhe nosso Instagram.</p></div>
+          <div className="flex gap-3">
+            {settings.instagramUrl && <a href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-white border text-sm font-medium">◎ Instagram</a>}
+            {settings.whatsappNumber && <a href={whatsappHref(settings.whatsappNumber, settings.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-[color:var(--color-brand-dark)] text-white text-sm font-medium">☏ WhatsApp</a>}
+          </div>
         </div>
       </div>
     </div>

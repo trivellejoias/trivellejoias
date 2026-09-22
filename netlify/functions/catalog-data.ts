@@ -18,6 +18,11 @@ export default async (request: Request) => {
   const store = getStore(STORE_NAME)
 
   if (request.method === 'GET') {
+    const url = new URL(request.url)
+    if (url.searchParams.get('type') === 'settings') {
+      const settings = await store.get('settings', { type: 'json' })
+      return response(settings ?? {})
+    }
     const data = await store.get(KEY, { type: 'json' })
     return response(data ?? {})
   }
@@ -43,6 +48,12 @@ export default async (request: Request) => {
     await store.setJSON(KEY, overrides, {
       metadata: { updatedAt: new Date().toISOString() },
     })
+
+    if (body?.settings && typeof body.settings === 'object' && !Array.isArray(body.settings)) {
+      await store.setJSON('settings', body.settings, {
+        metadata: { updatedAt: new Date().toISOString() },
+      })
+    }
 
     return response({ ok: true, savedAt: new Date().toISOString() })
   } catch (error) {
