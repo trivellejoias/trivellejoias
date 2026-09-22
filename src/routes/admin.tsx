@@ -24,22 +24,9 @@ function AdminPage() {
 
   useEffect(() => {
     if (!authorized) return
-    fetch('/catalog-overrides.json', { cache: 'no-store' })
+    fetch('/.netlify/functions/catalog-data', { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : {}))
-      .then((data) => {
-        let next = data as CatalogOverrides
-        try {
-          const local = localStorage.getItem('trivelle-catalog-overrides')
-          if (local) {
-            const localData: CatalogOverrides = JSON.parse(local)
-            next = { ...next }
-            for (const [id, override] of Object.entries(localData)) {
-              next[id] = { ...(next[id] ?? {}), ...override }
-            }
-          }
-        } catch {}
-        setOverrides(next)
-      })
+      .then((data) => setOverrides((data ?? {}) as CatalogOverrides))
       .catch(() => {})
       .finally(() => setLoaded(true))
   }, [authorized])
@@ -76,27 +63,40 @@ function AdminPage() {
     setSavedMessage('Alteração pendente — clique em “Salvar alterações”.')
   }
 
-  function saveChanges() {
-    localStorage.setItem('trivelle-catalog-overrides', JSON.stringify(overrides))
-    setSavedMessage('✓ Alterações salvas neste dispositivo.')
-    window.setTimeout(() => setSavedMessage(''), 4000)
+  async function saveChanges() {
+    const adminPassword = sessionStorage.getItem('trivelle-admin-password')
+    if (!adminPassword) {
+      setSavedMessage('Sua sessão expirou. Entre novamente.')
+      setAuthorized(false)
+      return
+    }
+
+    setSavedMessage('Salvando…')
+    try {
+      const response = await fetch('/.netlify/functions/catalog-data', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: adminPassword, overrides }),
+      })
+      if (!response.ok) throw new Error()
+      setSavedMessage('✓ Alterações salvas no catálogo para todas as clientes.')
+      window.setTimeout(() => setSavedMessage(''), 5000)
+    } catch {
+      setSavedMessage('Não foi possível salvar. Verifique sua conexão e tente novamente.')
+    }
   }
 
-  function downloadForPublish() {
-    saveChanges()
-    const blob = new Blob([JSON.stringify(overrides, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'catalog-overrides.json'
-    a.click()
-    URL.revokeObjectURL(url)
-    setSavedMessage('✓ Salvo e arquivo baixado. Para publicar para todas as clientes, substitua catalog-overrides.json no GitHub.')
-  }
-
-  function restorePublished() {
-    localStorage.removeItem('trivelle-catalog-overrides')
-    window.location.reload()
+  async function refreshFromServer() {
+    try {
+      const response = await fetch('/.netlify/functions/catalog-data', { cache: 'no-store' })
+      if (!response.ok) throw new Error()
+      const data = (await response.json()) as CatalogOverrides
+      setOverrides(data ?? {})
+      setSavedMessage('✓ Dados recarregados do catálogo publicado.')
+      window.setTimeout(() => setSavedMessage(''), 4000)
+    } catch {
+      setSavedMessage('Não foi possível recarregar os dados.')
+    }
   }
 
   if (checking) return <div className="min-h-screen p-8">Verificando acesso…</div>
@@ -133,8 +133,7 @@ function AdminPage() {
             </div>
             <div className="flex flex-wrap gap-2 items-center">
               {savedMessage && <span className="text-xs max-w-xs text-right text-[color:var(--color-brand-dark)]">{savedMessage}</span>}
-              <button onClick={restorePublished} className="rounded-full px-4 py-2 border text-sm">Desfazer alterações locais</button>
-              <button onClick={downloadForPublish} className="rounded-full px-4 py-2 border text-sm">Baixar para publicar</button>
+              <button onClick={refreshFromServer} className="rounded-full px-4 py-2 border text-sm">Recarregar do catálogo</button>
               <button onClick={saveChanges} className="rounded-full px-5 py-2 bg-[color:var(--color-brand-dark)] text-white font-medium">Salvar alterações</button>
             </div>
           </div>
@@ -207,7 +206,7 @@ function AdminPage() {
               <div className="mt-8 pt-5 border-t flex flex-wrap gap-3 items-center">
                 <button onClick={saveChanges} className="rounded-full px-6 py-3 bg-[color:var(--color-brand-dark)] text-white font-medium">Salvar alterações</button>
                 <button onClick={() => update(current.id, { hidden: !currentOverride.hidden })} className="rounded-full px-5 py-3 border">{currentOverride.hidden ? 'Mostrar novamente' : 'Ocultar este anúncio'}</button>
-                <span className="text-xs opacity-60">As alterações ficam salvas neste dispositivo. Use “Baixar para publicar” quando quiser atualizar o catálogo para todas as clientes.</span>
+                <span className="text-xs opacity-60">As alterações são salvas no servidor e ficam disponíveis para todas as clientes.</span>
               </div>
             </>}
           </section>

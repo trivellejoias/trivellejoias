@@ -12,27 +12,13 @@ export type ProductOverride = {
 export type CatalogOverrides = Record<string, ProductOverride>
 
 export async function loadCatalogOverrides(): Promise<CatalogOverrides> {
-  let published: CatalogOverrides = {}
   try {
-    const response = await fetch('/catalog-overrides.json', { cache: 'no-store' })
-    published = response.ok ? await response.json() : {}
+    const response = await fetch('/.netlify/functions/catalog-data', { cache: 'no-store' })
+    if (!response.ok) return {}
+    const data = await response.json()
+    return data && typeof data === 'object' ? (data as CatalogOverrides) : {}
   } catch {
-    published = {}
-  }
-
-  // Mantém as alterações salvas no dispositivo do administrador como complemento.
-  // Isso permite testar as edições imediatamente sem precisar publicar no GitHub.
-  try {
-    const local = localStorage.getItem('trivelle-catalog-overrides')
-    if (!local) return published
-    const localOverrides: CatalogOverrides = JSON.parse(local)
-    const merged: CatalogOverrides = { ...published }
-    for (const [id, override] of Object.entries(localOverrides)) {
-      merged[id] = { ...(merged[id] ?? {}), ...override }
-    }
-    return merged
-  } catch {
-    return published
+    return {}
   }
 }
 
