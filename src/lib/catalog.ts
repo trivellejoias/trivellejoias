@@ -4,6 +4,7 @@ export type ProductOverride = {
   name?: string
   description?: string
   shortDescription?: string
+  category?: import('@/data/products').ProductCategory
   price?: number
   stock?: number
   image?: string
@@ -11,6 +12,7 @@ export type ProductOverride = {
 }
 
 export type CatalogOverrides = Record<string, ProductOverride>
+export type CatalogAdditions = Record<string, import('@/data/products').Product>
 
 export type CatalogSettings = {
   instagramUrl?: string
@@ -47,4 +49,15 @@ export async function loadCatalogSettings(): Promise<CatalogSettings> {
 export function whatsappHref(number: string, message = 'Olá! Vim pelo catálogo da Trivelle e gostaria de saber mais sobre as peças.'): string {
   const digits = number.replace(/\D/g, '')
   return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`
+}
+
+export async function loadCatalogAdditions(): Promise<CatalogAdditions> {
+  try {
+    const response = await fetch('/.netlify/functions/catalog-data?type=additions', { cache: 'no-store' })
+    if (!response.ok) return {}
+    const data = await response.json()
+    return data && typeof data === 'object' ? (data as CatalogAdditions) : {}
+  } catch {
+    return {}
+  }
 }

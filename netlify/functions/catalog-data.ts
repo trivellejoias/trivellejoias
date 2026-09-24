@@ -23,6 +23,10 @@ export default async (request: Request) => {
       const settings = await store.get('settings', { type: 'json' })
       return response(settings ?? {})
     }
+    if (url.searchParams.get('type') === 'additions') {
+      const additions = await store.get('additions', { type: 'json' })
+      return response(additions ?? {})
+    }
     const data = await store.get(KEY, { type: 'json' })
     return response(data ?? {})
   }
@@ -48,6 +52,13 @@ export default async (request: Request) => {
     await store.setJSON(KEY, overrides, {
       metadata: { updatedAt: new Date().toISOString() },
     })
+
+    const additions = body?.additions
+    if (additions && typeof additions === 'object' && !Array.isArray(additions)) {
+      await store.setJSON('additions', additions, {
+        metadata: { updatedAt: new Date().toISOString() },
+      })
+    }
 
     if (body?.settings && typeof body.settings === 'object' && !Array.isArray(body.settings)) {
       await store.setJSON('settings', body.settings, {

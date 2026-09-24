@@ -23,3 +23,5 @@ body {
 code {
   font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+@keyframes logoReveal { 0% { opacity: 0; transform: scale(0.92); } 22% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.04); } }

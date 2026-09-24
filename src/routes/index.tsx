@@ -2,7 +2,8 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, createFileRoute } from '@tanstack/react-router'
 import products, { type Product } from '@/data/products'
 import { BuyButton } from '@/components/BuyButton'
-import { applyOverride, loadCatalogOverrides, loadCatalogSettings, type CatalogOverrides, type CatalogSettings, whatsappHref } from '@/lib/catalog'
+import { applyOverride, loadCatalogAdditions, loadCatalogOverrides, loadCatalogSettings, type CatalogAdditions, type CatalogOverrides, type CatalogSettings, whatsappHref } from '@/lib/catalog'
+import { trackEvent, trackVisitOnce } from '@/lib/analytics'
 
 export const Route = createFileRoute('/')({
   component: ProductsIndex,
@@ -21,20 +22,22 @@ const categories: Array<Product['category'] | 'Todos'> = [
 
 function ProductsIndex() {
   const [overrides, setOverrides] = useState<CatalogOverrides>({})
+  const [additions, setAdditions] = useState<CatalogAdditions>({})
   const [settings, setSettings] = useState<CatalogSettings>({ instagramUrl: 'https://www.instagram.com/trivellejoias/', whatsappNumber: '5519982124939', whatsappMessage: 'Olá! Vim pelo catálogo da Trivelle e gostaria de saber mais sobre as peças.' })
-  useEffect(() => { loadCatalogOverrides().then(setOverrides); loadCatalogSettings().then((s) => setSettings((prev) => ({ ...prev, ...s }))) }, [])
+  useEffect(() => { trackVisitOnce(); loadCatalogOverrides().then(setOverrides); loadCatalogAdditions().then(setAdditions); loadCatalogSettings().then((s) => setSettings((prev) => ({ ...prev, ...s }))) }, [])
 
   const [activeCategory, setActiveCategory] = useState<
     (typeof categories)[number]
   >('Todos')
 
   const filtered = useMemo(() => {
-    const available = products
+    const baseProducts = [...products, ...Object.values(additions)]
+    const available = baseProducts
       .map((p) => applyOverride(p, overrides))
       .filter((p) => (p.stock ?? 0) > 0)
       .filter((p) => !p.hidden && !p.deleted)
     return activeCategory === 'Todos' ? available : available.filter((p) => p.category === activeCategory)
-  }, [activeCategory, overrides])
+  }, [activeCategory, overrides, additions])
 
   return (
     <div className="min-h-screen bg-[#fffdfc]">
@@ -116,8 +119,8 @@ function ProductsIndex() {
         <div className="rounded-3xl bg-[color:var(--color-brand-light)] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-5">
           <div className="text-center md:text-left"><p className="font-display text-2xl">Fale com a Trivelle 💎</p><p className="text-sm opacity-70 mt-1">Acompanhe novidades ou fale com a gente pelo WhatsApp.</p></div>
           <div className="flex flex-wrap justify-center gap-3">
-            {settings.instagramUrl && <a href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-white border border-[color:var(--color-brand)] text-sm font-medium">◎ Instagram</a>}
-            {settings.whatsappNumber && <a href={whatsappHref(settings.whatsappNumber, settings.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-[color:var(--color-brand-dark)] text-white text-sm font-medium">☏ WhatsApp</a>}
+            {settings.instagramUrl && <a onClick={() => trackEvent({ type: 'instagram_click', path: window.location.pathname })} href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-white border border-[color:var(--color-brand)] text-sm font-medium">◎ Instagram</a>}
+            {settings.whatsappNumber && <a onClick={() => trackEvent({ type: 'whatsapp_click', path: window.location.pathname })} href={whatsappHref(settings.whatsappNumber, settings.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-[color:var(--color-brand-dark)] text-white text-sm font-medium">☏ WhatsApp</a>}
           </div>
         </div>
       </section>

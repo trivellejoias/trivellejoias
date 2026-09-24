@@ -2,12 +2,15 @@ import { Link, createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import products from '../../data/products'
 import { BuyButton } from '@/components/BuyButton'
-import { applyOverride, loadCatalogOverrides, loadCatalogSettings, type CatalogSettings, whatsappHref } from '@/lib/catalog'
+import { applyOverride, loadCatalogAdditions, loadCatalogOverrides, loadCatalogSettings, type CatalogSettings, whatsappHref } from '@/lib/catalog'
+import { trackEvent, trackVisitOnce } from '@/lib/analytics'
 
 export const Route = createFileRoute('/products/$productId')({
   component: RouteComponent,
   loader: async ({ params }) => {
-    const product = products.find((product) => product.id === +params.productId)
+    const additions = await loadCatalogAdditions()
+    const baseProducts = [...products, ...Object.values(additions)]
+    const product = baseProducts.find((product) => product.id === +params.productId)
     if (!product) throw new Error('Product not found')
     const overrides = await loadCatalogOverrides()
     const merged = applyOverride(product, overrides)
@@ -18,36 +21,47 @@ export const Route = createFileRoute('/products/$productId')({
 
 function RouteComponent() {
   const product = Route.useLoaderData()
+  const [selectedImage, setSelectedImage] = useState(0)
+  const [showLogoEffect, setShowLogoEffect] = useState(true)
   const [settings, setSettings] = useState<CatalogSettings>({ instagramUrl: 'https://www.instagram.com/trivellejoias/', whatsappNumber: '5519982124939', whatsappMessage: 'Olá! Vim pelo catálogo da Trivelle e gostaria de saber mais sobre as peças.' })
-  useEffect(() => { loadCatalogSettings().then((s) => setSettings((prev) => ({ ...prev, ...s }))) }, [])
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShowLogoEffect(false), 850)
+    return () => window.clearTimeout(timer)
+  }, [])
+  useEffect(() => { trackVisitOnce(); trackEvent({ type: 'product_view', productId: product.id, productName: product.name, category: product.category, path: window.location.pathname }); loadCatalogSettings().then((s) => setSettings((prev) => ({ ...prev, ...s }))) }, [product.id, product.name, product.category])
 
   return (
     <div className="min-h-screen bg-[#fffdfc]">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 px-6 py-14">
         <div className="w-full md:w-1/2">
-          <div className="aspect-square rounded-2xl overflow-hidden border border-[color:var(--color-brand-light)] bg-white">
+          <div className="relative aspect-square rounded-2xl overflow-hidden border border-[color:var(--color-brand-light)] bg-white shadow-sm">
             <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-full object-cover"
+              src={product.images[selectedImage] || product.image}
+              alt={`${product.name} — foto ${selectedImage + 1}`}
+              className="w-full h-full object-contain transition-opacity duration-300"
             />
+            {showLogoEffect && (
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center animate-[logoReveal_850ms_ease-out_forwards]">
+                <img src="/images/trivelle-logo-mark.png" alt="" className="w-40 md:w-52 opacity-[0.10] blur-[0.2px]" />
+              </div>
+            )}
           </div>
           {product.images.length > 1 && (
-            <div className="grid grid-cols-4 gap-3 mt-3">
-              {product.images.slice(0, 4).map((image, index) => (
-                <div
-                  key={image}
-                  className="aspect-square rounded-xl overflow-hidden border border-[color:var(--color-brand-light)] bg-white"
+            <div className="mt-4 space-y-3">
+              {product.images.map((image, index) => (
+                <button
+                  type="button"
+                  key={`${image}-${index}`}
+                  onClick={() => setSelectedImage(index)}
+                  className={`w-full aspect-square rounded-2xl overflow-hidden border bg-white transition-all ${selectedImage === index ? 'border-[color:var(--color-brand-dark)] ring-2 ring-[color:var(--color-brand-light)]' : 'border-[color:var(--color-brand-light)] hover:border-[color:var(--color-brand)]'}`}
+                  aria-label={`Ver foto ${index + 1} em tamanho grande`}
                 >
-                  <img
-                    src={image}
-                    alt={`${product.name} — foto ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                  <img src={image} alt={`${product.name} — foto ${index + 1}`} className="w-full h-full object-contain" />
+                </button>
               ))}
             </div>
           )}
+          {product.images.length > 1 && <p className="text-xs opacity-50 mt-2 text-center">Toque em uma foto para vê-la em tamanho grande.</p>}
         </div>
 
         <div className="w-full md:w-1/2">
@@ -85,8 +99,8 @@ function RouteComponent() {
         <div className="rounded-3xl bg-[color:var(--color-brand-light)] p-6 flex flex-wrap items-center justify-between gap-4">
           <div><p className="font-display text-xl">Gostou da peça?</p><p className="text-sm opacity-70">Fale com a Trivelle ou acompanhe nosso Instagram.</p></div>
           <div className="flex gap-3">
-            {settings.instagramUrl && <a href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-white border text-sm font-medium">◎ Instagram</a>}
-            {settings.whatsappNumber && <a href={whatsappHref(settings.whatsappNumber, settings.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-[color:var(--color-brand-dark)] text-white text-sm font-medium">☏ WhatsApp</a>}
+            {settings.instagramUrl && <a onClick={() => trackEvent({ type: 'instagram_click', path: window.location.pathname })} href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-white border text-sm font-medium">◎ Instagram</a>}
+            {settings.whatsappNumber && <a onClick={() => trackEvent({ type: 'whatsapp_click', productId: product.id, productName: product.name, path: window.location.pathname })} href={whatsappHref(settings.whatsappNumber, settings.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-[color:var(--color-brand-dark)] text-white text-sm font-medium">☏ WhatsApp</a>}
           </div>
         </div>
       </div>
