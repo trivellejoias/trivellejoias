@@ -22,6 +22,7 @@ export const Route = createFileRoute('/products/$productId')({
 function RouteComponent() {
   const product = Route.useLoaderData()
   const [selectedImage, setSelectedImage] = useState(0)
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false)
   const [showLogoEffect, setShowLogoEffect] = useState(true)
   const [settings, setSettings] = useState<CatalogSettings>({ instagramUrl: 'https://www.instagram.com/trivellejoias/', whatsappNumber: '5519982124939', whatsappMessage: 'Olá! Vim pelo catálogo da Trivelle e gostaria de saber mais sobre as peças.' })
   useEffect(() => {
@@ -34,7 +35,12 @@ function RouteComponent() {
     <div className="min-h-screen bg-[#fffdfc]">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 px-6 py-14">
         <div className="w-full md:w-1/2">
-          <div className="relative aspect-square rounded-2xl overflow-hidden border border-[color:var(--color-brand-light)] bg-white shadow-sm">
+          <button
+            type="button"
+            onClick={() => setIsGalleryOpen(true)}
+            className="relative block w-full aspect-square rounded-2xl overflow-hidden border border-[color:var(--color-brand-light)] bg-white shadow-sm cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand)]"
+            aria-label="Ampliar fotos do produto"
+          >
             <img
               src={product.images[selectedImage] || product.image}
               alt={`${product.name} — foto ${selectedImage + 1}`}
@@ -45,24 +51,70 @@ function RouteComponent() {
                 <img src="/images/trivelle-logo-mark.png" alt="" className="w-40 md:w-52 opacity-[0.10] blur-[0.2px]" />
               </div>
             )}
-          </div>
+            {product.images.length > 1 && (
+              <span className="absolute bottom-3 right-3 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium shadow-sm backdrop-blur">
+                Clique para ampliar · {selectedImage + 1}/{product.images.length}
+              </span>
+            )}
+          </button>
+
           {product.images.length > 1 && (
-            <div className="mt-4 space-y-3">
-              {product.images.map((image, index) => (
+            <p className="text-xs opacity-50 mt-3 text-center">Clique na foto para abrir todas as imagens em tamanho grande.</p>
+          )}
+
+          {isGalleryOpen && (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 md:p-8"
+              role="dialog"
+              aria-modal="true"
+              aria-label={`Galeria de fotos de ${product.name}`}
+              onClick={() => setIsGalleryOpen(false)}
+            >
+              <button
+                type="button"
+                onClick={() => setIsGalleryOpen(false)}
+                className="absolute right-4 top-4 z-10 rounded-full bg-white/90 px-4 py-2 text-lg shadow-lg hover:bg-white"
+                aria-label="Fechar galeria"
+              >
+                ×
+              </button>
+
+              {product.images.length > 1 && (
                 <button
                   type="button"
-                  key={`${image}-${index}`}
-                  onClick={() => setSelectedImage(index)}
-                  className={`w-full aspect-square rounded-2xl overflow-hidden border bg-white transition-all ${selectedImage === index ? 'border-[color:var(--color-brand-dark)] ring-2 ring-[color:var(--color-brand-light)]' : 'border-[color:var(--color-brand-light)] hover:border-[color:var(--color-brand)]'}`}
-                  aria-label={`Ver foto ${index + 1} em tamanho grande`}
+                  onClick={(event) => { event.stopPropagation(); setSelectedImage((selectedImage - 1 + product.images.length) % product.images.length) }}
+                  className="absolute left-3 md:left-6 z-10 rounded-full bg-white/90 w-11 h-11 text-2xl shadow-lg hover:bg-white"
+                  aria-label="Foto anterior"
                 >
-                  <img src={image} alt={`${product.name} — foto ${index + 1}`} className="w-full h-full object-contain" />
+                  ‹
                 </button>
-              ))}
+              )}
+
+              <div className="relative max-w-5xl max-h-[90vh] w-full h-full flex items-center justify-center" onClick={(event) => event.stopPropagation()}>
+                <img
+                  src={product.images[selectedImage] || product.image}
+                  alt={`${product.name} — foto ${selectedImage + 1}`}
+                  className="max-w-full max-h-full object-contain rounded-xl"
+                />
+                {product.images.length > 1 && (
+                  <span className="absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-black/55 text-white px-3 py-1 text-xs">
+                    {selectedImage + 1} / {product.images.length}
+                  </span>
+                )}
+              </div>
+
+              {product.images.length > 1 && (
+                <button
+                  type="button"
+                  onClick={(event) => { event.stopPropagation(); setSelectedImage((selectedImage + 1) % product.images.length) }}
+                  className="absolute right-3 md:right-6 z-10 rounded-full bg-white/90 w-11 h-11 text-2xl shadow-lg hover:bg-white"
+                  aria-label="Próxima foto"
+                >
+                  ›
+                </button>
+              )}
             </div>
           )}
-          {product.images.length > 1 && <p className="text-xs opacity-50 mt-2 text-center">Toque em uma foto para vê-la em tamanho grande.</p>}
-        </div>
 
         <div className="w-full md:w-1/2">
           <Link
@@ -96,9 +148,8 @@ function RouteComponent() {
       </div>
 
       <div className="max-w-6xl mx-auto px-6 pb-14">
-        <div className="rounded-3xl bg-[color:var(--color-brand-light)] p-6 flex flex-wrap items-center justify-between gap-4">
-          <div><p className="font-display text-xl">Gostou da peça?</p><p className="text-sm opacity-70">Fale com a Trivelle ou acompanhe nosso Instagram.</p></div>
-          <div className="flex gap-3">
+        <div className="rounded-3xl bg-[color:var(--color-brand-light)] p-6 flex items-center justify-center">
+          <div className="flex flex-wrap justify-center gap-3">
             {settings.instagramUrl && <a onClick={() => trackEvent({ type: 'instagram_click', path: window.location.pathname })} href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-white border text-sm font-medium">◎ Instagram</a>}
             {settings.whatsappNumber && <a onClick={() => trackEvent({ type: 'whatsapp_click', productId: product.id, productName: product.name, path: window.location.pathname })} href={whatsappHref(settings.whatsappNumber, settings.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-[color:var(--color-brand-dark)] text-white text-sm font-medium">☏ WhatsApp</a>}
           </div>
