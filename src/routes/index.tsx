@@ -4,7 +4,6 @@ import products, { type Product } from '@/data/products'
 import { BuyButton } from '@/components/BuyButton'
 import { applyOverride, loadCatalogAdditions, loadCatalogOverrides, loadCatalogSettings, type CatalogAdditions, type CatalogOverrides, type CatalogSettings, whatsappHref } from '@/lib/catalog'
 import { trackEvent, trackVisitOnce } from '@/lib/analytics'
-import { InstagramIcon, WhatsAppIcon } from '@/components/SocialIcons'
 
 export const Route = createFileRoute('/')({
   component: ProductsIndex,
@@ -120,8 +119,8 @@ function ProductsIndex() {
         <div className="rounded-3xl bg-[color:var(--color-brand-light)] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-5">
           <div className="text-center md:text-left"><p className="font-display text-2xl">Fale com a Trivelle 💎</p><p className="text-sm opacity-70 mt-1">Acompanhe novidades ou fale com a gente pelo WhatsApp.</p></div>
           <div className="flex flex-wrap justify-center gap-3">
-            {settings.instagramUrl && <a onClick={() => trackEvent({ type: 'instagram_click', path: window.location.pathname })} href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 bg-white border border-[color:var(--color-brand)] text-sm font-medium hover:shadow-sm transition-shadow"><InstagramIcon /> Instagram</a>}
-            {settings.whatsappNumber && <a onClick={() => trackEvent({ type: 'whatsapp_click', path: window.location.pathname })} href={whatsappHref(settings.whatsappNumber, settings.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 bg-[color:var(--color-brand-dark)] text-white text-sm font-medium hover:opacity-95"><WhatsAppIcon /> WhatsApp</a>}
+            {settings.instagramUrl && <a onClick={() => trackEvent({ type: 'instagram_click', path: window.location.pathname })} href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-white border border-[color:var(--color-brand)] text-sm font-medium">◎ Instagram</a>}
+            {settings.whatsappNumber && <a onClick={() => trackEvent({ type: 'whatsapp_click', path: window.location.pathname })} href={whatsappHref(settings.whatsappNumber, settings.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-[color:var(--color-brand-dark)] text-white text-sm font-medium">☏ WhatsApp</a>}
           </div>
         </div>
       </section>

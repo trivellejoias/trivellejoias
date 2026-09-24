@@ -2,7 +2,6 @@ import products from '@/data/products'
 import { useEffect, useState } from 'react'
 import { applyOverride, loadCatalogOverrides, type ProductOverride } from '@/lib/catalog'
 import { trackEvent } from '@/lib/analytics'
-import { WhatsAppIcon } from '@/components/SocialIcons'
 
 const WHATSAPP_NUMBER = '5519982124939'
 
@@ -41,10 +40,9 @@ export function BuyButton({
       onClick={() => trackEvent({ type: 'whatsapp_click', productId, productName: product.name })}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center justify-center gap-2 px-6 py-2 rounded-full border text-sm font-medium transition-colors ${className}`}
+      className={`inline-flex items-center justify-center px-6 py-2 rounded-full border text-sm font-medium transition-colors ${className}`}
       aria-label={`Comprar ${product.name} pelo WhatsApp`}
     >
-      <WhatsAppIcon className="h-5 w-5" />
       Comprar pelo WhatsApp
     </a>
   )
