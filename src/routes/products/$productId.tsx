@@ -4,6 +4,7 @@ import products from '../../data/products'
 import { BuyButton } from '@/components/BuyButton'
 import { applyOverride, loadCatalogAdditions, loadCatalogOverrides, loadCatalogSettings, type CatalogSettings, whatsappHref } from '@/lib/catalog'
 import { trackEvent, trackVisitOnce } from '@/lib/analytics'
+import { InstagramIcon, WhatsAppIcon } from '@/components/SocialIcons'
 
 export const Route = createFileRoute('/products/$productId')({
   component: RouteComponent,
@@ -59,12 +60,15 @@ function RouteComponent() {
           </button>
 
           {product.images.length > 1 && (
-            <p className="text-xs opacity-50 mt-3 text-center">Clique na foto para abrir todas as imagens em tamanho grande.</p>
+            <div className="mt-3 flex items-center justify-center gap-2 text-xs opacity-55">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-current" />
+              Toque na foto para ver as demais em tamanho grande
+            </div>
           )}
 
           {isGalleryOpen && (
             <div
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 md:p-8"
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 md:p-8 backdrop-blur-[2px]"
               role="dialog"
               aria-modal="true"
               aria-label={`Galeria de fotos de ${product.name}`}
@@ -90,11 +94,11 @@ function RouteComponent() {
                 </button>
               )}
 
-              <div className="relative max-w-5xl max-h-[90vh] w-full h-full flex items-center justify-center" onClick={(event) => event.stopPropagation()}>
+              <div className="relative max-w-6xl max-h-[92vh] w-full h-full flex items-center justify-center" onClick={(event) => event.stopPropagation()}>
                 <img
                   src={product.images[selectedImage] || product.image}
                   alt={`${product.name} — foto ${selectedImage + 1}`}
-                  className="max-w-full max-h-full object-contain rounded-xl"
+                  className="max-w-full max-h-full object-contain rounded-xl select-none"
                 />
                 {product.images.length > 1 && (
                   <span className="absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-black/55 text-white px-3 py-1 text-xs">
@@ -150,8 +154,8 @@ function RouteComponent() {
       <div className="max-w-6xl mx-auto px-6 pb-14">
         <div className="rounded-3xl bg-[color:var(--color-brand-light)] p-6 flex items-center justify-center">
           <div className="flex flex-wrap justify-center gap-3">
-            {settings.instagramUrl && <a onClick={() => trackEvent({ type: 'instagram_click', path: window.location.pathname })} href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-white border text-sm font-medium">◎ Instagram</a>}
-            {settings.whatsappNumber && <a onClick={() => trackEvent({ type: 'whatsapp_click', productId: product.id, productName: product.name, path: window.location.pathname })} href={whatsappHref(settings.whatsappNumber, settings.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="rounded-full px-5 py-2.5 bg-[color:var(--color-brand-dark)] text-white text-sm font-medium">☏ WhatsApp</a>}
+            {settings.instagramUrl && <a onClick={() => trackEvent({ type: 'instagram_click', path: window.location.pathname })} href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 bg-white border text-sm font-medium hover:shadow-sm transition-shadow"><InstagramIcon /> Instagram</a>}
+            {settings.whatsappNumber && <a onClick={() => trackEvent({ type: 'whatsapp_click', productId: product.id, productName: product.name, path: window.location.pathname })} href={whatsappHref(settings.whatsappNumber, settings.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 bg-[color:var(--color-brand-dark)] text-white text-sm font-medium hover:opacity-95"><WhatsAppIcon /> WhatsApp</a>}
           </div>
         </div>
       </div>
