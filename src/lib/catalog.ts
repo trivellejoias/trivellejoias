@@ -9,6 +9,7 @@ export type ProductOverride = {
   stock?: number
   image?: string
   images?: string[]
+  order?: number
 }
 
 export type CatalogOverrides = Record<string, ProductOverride>
