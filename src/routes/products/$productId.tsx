@@ -47,16 +47,16 @@ function RouteComponent() {
             )}
           </div>
           {product.images.length > 1 && (
-            <div className="mt-4 space-y-3">
+            <div className="mt-4 flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory">
               {product.images.map((image, index) => (
                 <button
                   type="button"
                   key={`${image}-${index}`}
                   onClick={() => setSelectedImage(index)}
-                  className={`w-full aspect-square rounded-2xl overflow-hidden border bg-white transition-all ${selectedImage === index ? 'border-[color:var(--color-brand-dark)] ring-2 ring-[color:var(--color-brand-light)]' : 'border-[color:var(--color-brand-light)] hover:border-[color:var(--color-brand)]'}`}
+                  className={`flex-none w-20 h-20 md:w-24 md:h-24 snap-start rounded-xl overflow-hidden border bg-white transition-all ${selectedImage === index ? 'border-[color:var(--color-brand-dark)] ring-2 ring-[color:var(--color-brand-light)]' : 'border-[color:var(--color-brand-light)] hover:border-[color:var(--color-brand)]'}`}
                   aria-label={`Ver foto ${index + 1} em tamanho grande`}
                 >
-                  <img src={image} alt={`${product.name} — foto ${index + 1}`} className="w-full h-full object-contain" />
+                  <img src={image} alt={`${product.name} — miniatura ${index + 1}`} className="w-full h-full object-contain" />
                 </button>
               ))}
             </div>
