@@ -32,10 +32,13 @@ function ProductsIndex() {
 
   const filtered = useMemo(() => {
     const baseProducts = [...products, ...Object.values(additions)]
+    const order = settings.productOrder ?? []
+    const rank = new Map(order.map((id, index) => [id, index]))
     const available = baseProducts
       .map((p) => applyOverride(p, overrides))
       .filter((p) => (p.stock ?? 0) > 0)
       .filter((p) => !p.hidden && !p.deleted)
+      .sort((a, b) => (rank.get(a.id) ?? Number.MAX_SAFE_INTEGER) - (rank.get(b.id) ?? Number.MAX_SAFE_INTEGER))
     return activeCategory === 'Todos' ? available : available.filter((p) => p.category === activeCategory)
   }, [activeCategory, overrides, additions])
 

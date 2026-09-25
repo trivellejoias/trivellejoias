@@ -18,6 +18,7 @@ export type CatalogSettings = {
   instagramUrl?: string
   whatsappNumber?: string
   whatsappMessage?: string
+  productOrder?: number[]
 }
 
 export async function loadCatalogOverrides(): Promise<CatalogOverrides> {
