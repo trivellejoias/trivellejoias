@@ -19,13 +19,6 @@ export default async (request: Request) => {
 
   if (request.method === 'GET') {
     const url = new URL(request.url)
-    if (url.searchParams.get('type') === 'image') {
-      const key = url.searchParams.get('key')
-      if (!key || !key.startsWith('uploads/')) return new Response('Not found', { status: 404 })
-      const result = await store.getWithMetadata(key, { type: 'arrayBuffer' })
-      if (!result?.data) return new Response('Not found', { status: 404 })
-      return new Response(result.data, { headers: { 'Content-Type': String(result.metadata?.contentType ?? 'image/jpeg'), 'Cache-Control': 'public, max-age=31536000, immutable' } })
-    }
     if (url.searchParams.get('type') === 'settings') {
       const settings = await store.get('settings', { type: 'json' })
       return response(settings ?? {})
@@ -49,22 +42,6 @@ export default async (request: Request) => {
 
     if (!expected || typeof password !== 'string' || password !== expected) {
       return response({ ok: false, error: 'unauthorized' }, 401)
-    }
-
-    if (body?.action === 'uploadImage') {
-      const dataUrl = typeof body?.dataUrl === 'string' ? body.dataUrl : ''
-      if (!dataUrl.startsWith('data:image/')) return response({ ok: false, error: 'invalid_image' }, 400)
-      const match = dataUrl.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/)
-      if (!match) return response({ ok: false, error: 'invalid_image' }, 400)
-      const mime = match[1]
-      const base64 = match[2]
-      const bytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0))
-      if (bytes.byteLength > 8 * 1024 * 1024) return response({ ok: false, error: 'image_too_large' }, 413)
-      const extension = mime.split('/')[1].replace('jpeg', 'jpg').replace(/[^a-z0-9]/gi, '') || 'jpg'
-      const key = `uploads/${crypto.randomUUID()}.${extension}`
-      await store.set(key, bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), { metadata: { contentType: mime } })
-      const url = `/.netlify/functions/catalog-data?type=image&key=${encodeURIComponent(key)}`
-      return response({ ok: true, url })
     }
 
     const overrides = body?.overrides
