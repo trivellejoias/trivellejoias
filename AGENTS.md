@@ -4,7 +4,7 @@ Visão geral do projeto para desenvolvedores e agentes de IA que trabalharem nes
 
 ## Visão geral
 
-Catálogo de joias da marca **Trivelle** ("joias em aço inox que não escurecem"), construído com TanStack Start e implantado na Netlify. Apresenta produtos por categoria (Anéis, Brincos, Colares, Pulseiras) com página de detalhe e checkout via Stripe.
+Catálogo de joias da marca **Trivelle** ("joias em aço inox que não escurecem"), construído com TanStack Start e implantado no Cloudflare Workers. Apresenta produtos por categoria (Anéis, Brincos, Colares, Pulseiras) com página de detalhe e checkout via Stripe.
 
 ### Stack
 
@@ -16,7 +16,7 @@ Catálogo de joias da marca **Trivelle** ("joias em aço inox que não escurecem
 | Estilo | Tailwind CSS 4 (utilitário, sem config file — v4 usa `@import "tailwindcss"`) |
 | Pagamentos | Stripe Checkout |
 | Linguagem | TypeScript 5.9 |
-| Deploy | Netlify |
+| Deploy | Cloudflare Workers |
 
 ## Estrutura de diretórios
 
@@ -39,7 +39,7 @@ Catálogo de joias da marca **Trivelle** ("joias em aço inox que não escurecem
 │   │   └── index.tsx               # Home: hero, filtro de categoria, grid de produtos
 │   ├── router.tsx
 │   └── styles.css                  # Tailwind + fontes (Playfair Display / Inter) + variáveis de cor da marca
-├── netlify.toml                    # command: vite build, publish: dist/client
+├── wrangler.jsonc                    # command: vite build, publish: dist/client
 └── vite.config.ts
 ```
 

@@ -1,23 +1,27 @@
-export default async (request: Request, context: any) => {
-  if (request.method !== 'POST') {
-    return new Response('Method not allowed', { status: 405 })
-  }
+import { createFileRoute } from '@tanstack/react-router'
+import { env } from 'cloudflare:workers'
 
-  try {
-    const { password } = await request.json()
+export const Route = createFileRoute('/admin-auth')({
+  server: {
+    handlers: {
+      POST: async ({ request }) => {
+        try {
+          const body = await request.json()
+          const password = body?.password
 
-    const expected = context.env.ADMIN_PASSWORD
+          if (
+            typeof password !== 'string' ||
+            !env.ADMIN_PASSWORD ||
+            password !== env.ADMIN_PASSWORD
+          ) {
+            return Response.json({ ok: false }, { status: 401 })
+          }
 
-    if (
-      !expected ||
-      typeof password !== 'string' ||
-      password !== expected
-    ) {
-      return Response.json({ ok: false }, { status: 401 })
-    }
-
-    return Response.json({ ok: true })
-  } catch {
-    return Response.json({ ok: false }, { status: 400 })
-  }
-}
+          return Response.json({ ok: true })
+        } catch {
+          return Response.json({ ok: false }, { status: 400 })
+        }
+      },
+    },
+  },
+})

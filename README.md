@@ -8,7 +8,7 @@ Catálogo online da Trivelle, marca de joias em aço inoxidável que não escure
 - Vite 7
 - Tailwind CSS 4
 - Stripe Checkout (opcional, via `STRIPE_SECRET_KEY`)
-- Deploy na Netlify
+- Deploy no Cloudflare Workers
 
 ## Rodando localmente
 

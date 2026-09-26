@@ -7,10 +7,28 @@ const headers = {
 }
 
 function json(body: unknown, status = 200) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers,
-  })
+  return new Response(JSON.stringify(body), { status, headers })
+}
+
+async function ensureSchema() {
+  await env.DB
+    .prepare(
+      `CREATE TABLE IF NOT EXISTS catalog (
+        id TEXT PRIMARY KEY,
+        data TEXT NOT NULL
+      )`,
+    )
+    .run()
+}
+
+async function getCatalog(key: string) {
+  const result = await env.DB
+    .prepare('SELECT data FROM catalog WHERE id = ?')
+    .bind(key)
+    .first<{ data: string }>()
+
+  if (!result?.data) return {}
+  return JSON.parse(result.data)
 }
 
 export const Route = createFileRoute('/catalog-data')({
@@ -18,20 +36,16 @@ export const Route = createFileRoute('/catalog-data')({
     handlers: {
       GET: async ({ request }) => {
         try {
-          const url = new URL(request.url)
-          const type = url.searchParams.get('type')
-          const key = type === 'settings' ? 'settings' : 'overrides'
+          await ensureSchema()
+          const type = new URL(request.url).searchParams.get('type')
+          const key =
+            type === 'settings'
+              ? 'settings'
+              : type === 'additions'
+                ? 'additions'
+                : 'overrides'
 
-          const result = await env.DB
-            .prepare('SELECT data FROM catalog WHERE id = ?')
-            .bind(key)
-            .first<{ data: string }>()
-
-          if (!result?.data) {
-            return json({})
-          }
-
-          return json(JSON.parse(result.data))
+          return json(await getCatalog(key))
         } catch (error) {
           console.error('catalog-data GET error', error)
           return json({})
@@ -40,6 +54,7 @@ export const Route = createFileRoute('/catalog-data')({
 
       POST: async ({ request }) => {
         try {
+          await ensureSchema()
           const body = await request.json()
           const password = body?.password
 
@@ -51,45 +66,33 @@ export const Route = createFileRoute('/catalog-data')({
             return json({ ok: false, error: 'unauthorized' }, 401)
           }
 
-          const overrides = body?.overrides
-          const settings = body?.settings
+          const values: Array<[string, unknown]> = [
+            ['overrides', body?.overrides],
+            ['additions', body?.additions],
+            ['settings', body?.settings],
+          ]
 
-          if (
-            !overrides ||
-            typeof overrides !== 'object' ||
-            Array.isArray(overrides)
-          ) {
-            return json({ ok: false, error: 'invalid_overrides' }, 400)
-          }
+          for (const [id, data] of values) {
+            if (
+              data === undefined ||
+              data === null ||
+              typeof data !== 'object' ||
+              Array.isArray(data)
+            ) {
+              continue
+            }
 
-          await env.DB
-            .prepare(
-              `INSERT INTO catalog (id, data)
-               VALUES (?, ?)
-               ON CONFLICT(id) DO UPDATE SET data = excluded.data`,
-            )
-            .bind('overrides', JSON.stringify(overrides))
-            .run()
-
-          if (
-            settings &&
-            typeof settings === 'object' &&
-            !Array.isArray(settings)
-          ) {
             await env.DB
               .prepare(
                 `INSERT INTO catalog (id, data)
                  VALUES (?, ?)
                  ON CONFLICT(id) DO UPDATE SET data = excluded.data`,
               )
-              .bind('settings', JSON.stringify(settings))
+              .bind(id, JSON.stringify(data))
               .run()
           }
 
-          return json({
-            ok: true,
-            savedAt: new Date().toISOString(),
-          })
+          return json({ ok: true, savedAt: new Date().toISOString() })
         } catch (error) {
           console.error('catalog-data POST error', error)
           return json({ ok: false, error: 'server_error' }, 500)

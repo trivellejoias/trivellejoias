@@ -631,7 +631,7 @@ function AdminPage() {
 
     try {
       const response = await fetch(
-        '/.netlify/functions/analytics',
+        '/analytics',
         {
           method: 'POST',
           headers: {

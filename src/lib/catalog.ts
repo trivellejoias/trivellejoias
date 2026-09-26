@@ -23,7 +23,7 @@ export type CatalogSettings = {
 
 export async function loadCatalogOverrides(): Promise<CatalogOverrides> {
   try {
-    const response = await fetch('/.netlify/functions/catalog-data', { cache: 'no-store' })
+    const response = await fetch('/catalog-data', { cache: 'no-store' })
     if (!response.ok) return {}
     const data = await response.json()
     return data && typeof data === 'object' ? (data as CatalogOverrides) : {}
@@ -38,7 +38,7 @@ export function applyOverride<T extends { id: number }>(product: T, overrides: C
 
 export async function loadCatalogSettings(): Promise<CatalogSettings> {
   try {
-    const response = await fetch('/.netlify/functions/catalog-data?type=settings', { cache: 'no-store' })
+    const response = await fetch('/catalog-data?type=settings', { cache: 'no-store' })
     if (!response.ok) return {}
     const data = await response.json()
     return data && typeof data === 'object' ? (data as CatalogSettings) : {}
@@ -54,7 +54,7 @@ export function whatsappHref(number: string, message = 'Olá! Vim pelo catálogo
 
 export async function loadCatalogAdditions(): Promise<CatalogAdditions> {
   try {
-    const response = await fetch('/.netlify/functions/catalog-data?type=additions', { cache: 'no-store' })
+    const response = await fetch('/catalog-data?type=additions', { cache: 'no-store' })
     if (!response.ok) return {}
     const data = await response.json()
     return data && typeof data === 'object' ? (data as CatalogAdditions) : {}
