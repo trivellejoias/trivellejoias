@@ -39,7 +39,7 @@ Catálogo de joias da marca **Trivelle** ("joias em aço inox que não escurecem
 │   │   └── index.tsx               # Home: hero, filtro de categoria, grid de produtos
 │   ├── router.tsx
 │   └── styles.css                  # Tailwind + fontes (Playfair Display / Inter) + variáveis de cor da marca
-├── wrangler.jsonc                    # command: vite build, publish: dist/client
+├── wrangler.jsonc                  # configuração do Cloudflare Worker
 └── vite.config.ts
 ```
 

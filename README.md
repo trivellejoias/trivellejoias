@@ -1,37 +1,37 @@
 # Trivelle — Catálogo de Joias
 
-Catálogo online da Trivelle, marca de joias em aço inoxidável que não escurecem. O site apresenta anéis, brincos, colares e pulseiras organizados por categoria, com página de detalhe por produto e checkout via Stripe.
+Catálogo online da Trivelle com painel administrativo em `/admin`, preparado para **Cloudflare Workers**.
 
 ## Tecnologias
 
-- [TanStack Start](https://tanstack.com/start) (React 19 + TanStack Router)
-- Vite 7
-- Tailwind CSS 4
-- Stripe Checkout (opcional, via `STRIPE_SECRET_KEY`)
-- Deploy no Cloudflare Workers
+- TanStack Start + React
+- Vite
+- Tailwind CSS
+- Cloudflare Workers
+- Cloudflare KV para os dados editados pelo painel
 
-## Rodando localmente
+## Instalação
 
 ```bash
 npm install
 npm run dev
 ```
 
-O site fica disponível em `http://localhost:3000`.
+## Deploy no Cloudflare
 
-Para habilitar o checkout com Stripe, defina a variável de ambiente `STRIPE_SECRET_KEY`. Sem essa variável, o botão de compra aparece desabilitado.
+1. Crie um namespace **Workers KV** no Cloudflare.
+2. No Worker, crie o binding com o nome exato **`CATALOG_KV`** apontando para esse namespace.
+3. Crie o secret **`ADMIN_PASSWORD`** com a senha que será usada em `/admin`.
+4. Execute:
 
-## Estrutura
+```bash
+npm run deploy
+```
 
-- `src/data/products.ts` — catálogo de produtos (nome, categoria, preço, descrição, imagem)
-- `src/routes/index.tsx` — página inicial com filtro por categoria
-- `src/routes/products/$productId.tsx` — página de detalhe do produto
-- `public/products/` — imagens ilustrativas das peças
-- `public/images/trivelle-logo.png` — identidade visual da marca
+O painel administrativo fica em `/admin`.
 
-## Atualização do catálogo
+### Importante
 
-- Produtos com estoque 0 não aparecem no catálogo.
-- Para editar anúncios, acesse `/admin`.
-- No editor, altere título, preço, descrição, URLs das fotos ou marque o anúncio como oculto.
-- Clique em **Baixar alterações** e substitua `public/catalog-overrides.json` no GitHub; depois faça um commit para publicar.
+O painel salva produtos, fotos, estoque, configurações e ordem no KV. Sem o binding `CATALOG_KV`, o painel entra em modo de configuração e não permitirá salvar até o armazenamento ser conectado. O projeto não depende de hospedagem externa para o catálogo ou para o painel.
+
+As fotos escolhidas no painel são redimensionadas para WebP antes de serem armazenadas. O projeto devolve uma mensagem específica quando o KV ou a senha ainda não foram configurados.

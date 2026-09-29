@@ -40,7 +40,7 @@ function ProductsIndex() {
       .filter((p) => !p.hidden && !p.deleted)
       .sort((a, b) => (rank.get(a.id) ?? Number.MAX_SAFE_INTEGER) - (rank.get(b.id) ?? Number.MAX_SAFE_INTEGER))
     return activeCategory === 'Todos' ? available : available.filter((p) => p.category === activeCategory)
-  }, [activeCategory, overrides, additions])
+  }, [activeCategory, overrides, additions, settings.productOrder])
 
   return (
     <div className="min-h-screen bg-[#fffdfc]">

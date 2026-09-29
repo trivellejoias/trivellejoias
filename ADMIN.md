@@ -1,12 +1,50 @@
 # Área administrativa da Trivelle
 
-A área `/admin` é protegida por uma senha verificada por uma Netlify Function.
+O painel `/admin` usa uma senha armazenada como **secret do Cloudflare Workers** e o **Cloudflare KV** para persistir as alterações.
 
-Antes do primeiro uso, na Netlify abra **Project configuration → Environment variables** e crie:
-- Nome: `ADMIN_PASSWORD`
-- Valor: uma senha forte escolhida por você.
+## Configuração no Cloudflare
 
-Depois de salvar a variável, faça um novo deploy (o próximo commit já fará isso).
+### 1. Criar o armazenamento
 
-A opção de edição não aparece no catálogo público. Para entrar, acesse manualmente:
-`https://trivellejoias.netlify.app/admin`
+Crie um namespace Workers KV.
+
+### 2. Vincular o KV
+
+No Worker, adicione um binding KV com:
+
+- **Variable name:** `CATALOG_KV`
+- **KV namespace:** o namespace criado no passo anterior
+
+### 3. Criar a senha
+
+Em **Settings → Variables and Secrets**, crie um secret:
+
+- **Nome:** `ADMIN_PASSWORD`
+- **Valor:** sua senha forte
+
+Depois faça um novo deploy.
+
+## O que o painel salva
+
+- título
+- preço
+- estoque
+- categoria
+- descrição
+- fotos
+- ordem dos produtos
+- produtos novos
+- ocultar/excluir/restaurar produtos
+- Instagram
+- WhatsApp
+- mensagem do WhatsApp
+
+As estatísticas também são gravadas no mesmo KV.
+
+## Se aparecer erro ao salvar
+
+A mensagem agora diferencia os problemas mais comuns:
+
+- `O armazenamento do Cloudflare não está configurado.` → falta o binding `CATALOG_KV`.
+- `Sua senha de administrador não foi aceita.` → `ADMIN_PASSWORD` não corresponde à senha usada no login.
+- erro de servidor → veja os logs do Worker no Cloudflare.
