@@ -32,6 +32,6 @@ O painel administrativo fica em `/admin`.
 
 ### Importante
 
-O painel salva produtos, fotos, estoque, configurações e ordem no KV. Sem o binding `CATALOG_KV`, o painel entra em modo de configuração e não permitirá salvar até o armazenamento ser conectado. O projeto não depende de hospedagem externa para o catálogo ou para o painel.
+O painel salva produtos, fotos, estoque, configurações e ordem no KV. O Worker precisa ter um binding KV chamado `CATALOG_KV`; depois de alterar bindings ou secrets, publique uma nova versão. O projeto não depende de hospedagem externa para o catálogo ou para o painel.
 
 As fotos escolhidas no painel são redimensionadas para WebP antes de serem armazenadas. O projeto devolve uma mensagem específica quando o KV ou a senha ainda não foram configurados.

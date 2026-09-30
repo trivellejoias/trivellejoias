@@ -49,9 +49,9 @@ function AdminPage() {
     if (!catalogResponse.ok) {
       let detail = ''
       try { detail = String((await catalogResponse.json())?.error ?? '') } catch {}
-      if (catalogResponse.status === 503 || detail === 'storage_not_configured') {
+      if (catalogResponse.status === 503 || detail === 'storage_not_configured' || detail === 'storage_binding_invalid') {
         setStorageReady(false)
-        throw new Error('O armazenamento do Cloudflare ainda não foi configurado. Vincule o KV CATALOG_KV ao Worker.')
+        throw new Error('O armazenamento do Cloudflare não está disponível. Confira o binding KV CATALOG_KV e faça um novo deploy.')
       }
       setStorageReady(true)
       throw new Error('Não foi possível carregar os dados do catálogo.')
@@ -247,8 +247,8 @@ function AdminPage() {
       if (!response.ok) {
         let detail = ''
         try { detail = String((await response.json())?.error ?? '') } catch {}
-        if (response.status === 503 || detail === 'storage_not_configured') {
-          throw new Error('O armazenamento do Cloudflare não está configurado. Crie o KV e vincule-o como CATALOG_KV.')
+        if (response.status === 503 || detail === 'storage_not_configured' || detail === 'storage_binding_invalid') {
+          throw new Error('O armazenamento do Cloudflare não está disponível. Vincule o KV como CATALOG_KV e faça um novo deploy.')
         }
         if (response.status === 401) {
           throw new Error('Sua senha de administrador não foi aceita. Entre novamente.')

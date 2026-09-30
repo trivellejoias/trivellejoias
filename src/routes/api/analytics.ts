@@ -77,6 +77,9 @@ export const Route = createFileRoute('/api/analytics')({
           if (error instanceof Error && error.message === 'storage_not_configured') {
             return json({ error: 'storage_not_configured' }, 503)
           }
+          if (error instanceof Error && error.message === 'storage_binding_invalid') {
+            return json({ error: 'storage_binding_invalid' }, 503)
+          }
           return json({ error: 'server_error' }, 500)
         }
       },
