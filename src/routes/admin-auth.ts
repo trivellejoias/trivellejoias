@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { env } from 'cloudflare:workers'
+import { getAdminPassword } from '@/lib/cloudflare-store.server'
 
 export const Route = createFileRoute('/admin-auth')({
   server: {
@@ -8,18 +8,19 @@ export const Route = createFileRoute('/admin-auth')({
         try {
           const body = await request.json()
           const password = body?.password
+          const expected = getAdminPassword()
 
-          if (
-            typeof password !== 'string' ||
-            !env.ADMIN_PASSWORD ||
-            password !== env.ADMIN_PASSWORD
-          ) {
-            return Response.json({ ok: false }, { status: 401 })
+          if (!expected) {
+            return Response.json({ ok: false, error: 'admin_password_not_configured' }, { status: 503 })
+          }
+
+          if (typeof password !== 'string' || password !== expected) {
+            return Response.json({ ok: false, error: 'unauthorized' }, { status: 401 })
           }
 
           return Response.json({ ok: true })
         } catch {
-          return Response.json({ ok: false }, { status: 400 })
+          return Response.json({ ok: false, error: 'invalid_request' }, { status: 400 })
         }
       },
     },

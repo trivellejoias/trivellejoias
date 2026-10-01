@@ -42,9 +42,9 @@ function AdminPage() {
 
   async function loadData() {
     const [catalogResponse, settingsResponse, additionsResponse] = await Promise.all([
-      fetch('/api/catalog-data', { cache: 'no-store' }),
-      fetch('/api/catalog-data?type=settings', { cache: 'no-store' }),
-      fetch('/api/catalog-data?type=additions', { cache: 'no-store' }),
+      fetch('/catalog-data', { cache: 'no-store' }),
+      fetch('/catalog-data?type=settings', { cache: 'no-store' }),
+      fetch('/catalog-data?type=additions', { cache: 'no-store' }),
     ])
     if (!catalogResponse.ok) {
       let detail = ''
@@ -76,7 +76,7 @@ function AdminPage() {
   async function login() {
     setLoginError('')
     try {
-      const response = await fetch('/api/admin-auth', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password }) })
+      const response = await fetch('/admin-auth', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password }) })
       if (!response.ok) {
         let detail = ''
         try { detail = String((await response.json())?.error ?? '') } catch {}
@@ -243,7 +243,7 @@ function AdminPage() {
     if (!adminPassword) { setSavedMessage('Sua sessão expirou. Entre novamente.'); setAuthorized(false); return }
     setSavedMessage('Salvando…')
     try {
-      const response = await fetch('/api/catalog-data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: adminPassword, overrides, additions, settings }) })
+      const response = await fetch('/catalog-data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: adminPassword, overrides, additions, settings }) })
       if (!response.ok) {
         let detail = ''
         try { detail = String((await response.json())?.error ?? '') } catch {}
@@ -265,7 +265,7 @@ function AdminPage() {
     const adminPassword = sessionStorage.getItem('trivelle-admin-password'); if (!adminPassword) return
     setStatsLoading(true); setStatsError('')
     try {
-      const response = await fetch('/api/analytics', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'stats', password: adminPassword }) })
+      const response = await fetch('/analytics', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'stats', password: adminPassword }) })
       if (!response.ok) throw new Error()
       setStats(await response.json() as AnalyticsStats)
     } catch {

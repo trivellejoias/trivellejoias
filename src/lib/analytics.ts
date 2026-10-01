@@ -24,11 +24,11 @@ export function trackEvent(event: AnalyticsEvent) {
   const payload = JSON.stringify({ ...event, visitorId: visitorKey(), at: new Date().toISOString() })
   try {
     if (navigator.sendBeacon) {
-      navigator.sendBeacon('/api/analytics', new Blob([payload], { type: 'application/json' }))
+      navigator.sendBeacon('/analytics', new Blob([payload], { type: 'application/json' }))
       return
     }
   } catch {}
-  void fetch('/api/analytics', {
+  void fetch('/analytics', {
     method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true,
   }).catch(() => {})
 }
