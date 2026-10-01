@@ -1,5 +1,6 @@
 import { createServerFn } from '@tanstack/react-start'
 import products from '@/data/products'
+import Stripe from 'stripe'
 
 export const getStripeEnabled = createServerFn({ method: 'GET' }).handler(
   () => !!process.env.STRIPE_SECRET_KEY
@@ -13,7 +14,6 @@ export const createCheckoutSession = createServerFn({
     if (!process.env.STRIPE_SECRET_KEY) {
       throw new Error('Stripe is not configured')
     }
-    const { default: Stripe } = await import('stripe')
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
     const product = products.find((p) => p.id === productId)
