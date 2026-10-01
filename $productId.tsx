@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
-import products from '../../data/products'
+import products from '@/data/products'
 import { BuyButton } from '@/components/BuyButton'
 import { applyOverride, loadCatalogOverrides, loadCatalogSettings, type CatalogSettings, whatsappHref } from '@/lib/catalog'
 
