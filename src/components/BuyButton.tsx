@@ -1,9 +1,10 @@
-import products from '@/data/products'
 import { useEffect, useState } from 'react'
-import { applyOverride, loadCatalogOverrides, type ProductOverride } from '@/lib/catalog'
+import products from '@/data/products'
+import { applyOverride, loadCatalogAdditions, loadCatalogOverrides, loadCatalogSettings, type ProductOverride } from '@/lib/catalog'
+import type { Product } from '@/data/products'
 import { trackEvent } from '@/lib/analytics'
 
-const WHATSAPP_NUMBER = '5519982124939'
+const DEFAULT_WHATSAPP_NUMBER = '5519982124939'
 
 export function BuyButton({
   productId,
@@ -12,17 +13,29 @@ export function BuyButton({
   productId: number
   className?: string
 }) {
-  const baseProduct = products.find((item) => item.id === productId)
+  const [baseProduct, setBaseProduct] = useState<Product | null>(products.find((item) => item.id === productId) ?? null)
   const [override, setOverride] = useState<ProductOverride>({})
-  useEffect(() => { loadCatalogOverrides().then((all) => setOverride(all[String(productId)] ?? {})) }, [productId])
-  const product = baseProduct ? applyOverride(baseProduct, { [String(productId)]: override }) : null
+  const [whatsappNumber, setWhatsappNumber] = useState(DEFAULT_WHATSAPP_NUMBER)
 
-  if (!product) return null
+  useEffect(() => {
+    let active = true
+    Promise.all([loadCatalogOverrides(), loadCatalogAdditions(), loadCatalogSettings()]).then(([overrides, additions, settings]) => {
+      if (!active) return
+      const found = products.find((item) => item.id === productId) ?? additions[String(productId)] ?? null
+      setBaseProduct(found)
+      setOverride(overrides[String(productId)] ?? {})
+      const configuredNumber = settings.whatsappNumber?.replace(/\D/g, '')
+      if (configuredNumber) setWhatsappNumber(configuredNumber)
+    }).catch(() => {})
+    return () => { active = false }
+  }, [productId])
 
+  if (!baseProduct) return null
+
+  const product = applyOverride(baseProduct, { [String(productId)]: override })
   const priceLabel = `${product.priceFrom ? 'a partir de ' : ''}R$ ${product.price.toLocaleString('pt-BR', {
     minimumFractionDigits: 2,
   })}`
-
   const message = [
     'Olá! 💎',
     '',
@@ -31,8 +44,7 @@ export function BuyButton({
     '',
     'Gostaria de saber como posso comprar.',
   ].join('\n')
-
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
 
   return (
     <a

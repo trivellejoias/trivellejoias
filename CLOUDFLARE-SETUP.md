@@ -1,6 +1,6 @@
 # Configuração do Trivelle no Cloudflare
 
-Esta versão corrige a compatibilidade das dependências TanStack/Cloudflare e deixa o erro do armazenamento explícito.
+Esta versão está configurada para Cloudflare Workers + TanStack Start.
 
 ## 1. KV obrigatório
 
@@ -10,28 +10,26 @@ O Worker precisa de um binding com o nome exato:
 
 - `CATALOG_KV`
 
-O binding deve apontar para o namespace KV do catálogo.
+O binding deve apontar para o namespace KV usado pelo catálogo.
 
-> Importante: o binding é uma configuração do Worker e precisa existir na versão publicada. Se você o criou pelo painel do Cloudflare, clique em **Deploy** depois de salvar a configuração.
+## 2. Senha do painel
 
-## 2. Senha
-
-Em **Settings → Variables and Secrets**, mantenha:
+Em **Settings → Variables and Secrets**, crie:
 
 - Nome: `ADMIN_PASSWORD`
 - Tipo: **Secret**
-- Valor: sua senha do painel
+- Valor: a senha usada para acessar `/admin`
 
 Depois de alterar a senha, publique uma nova versão.
 
 ## 3. Deploy
 
-No Cloudflare:
+No Cloudflare Workers:
 
-- Build command: `pnpm run build`
+- Build command: `npm run build`
 - Deploy command: `npx wrangler deploy`
 
-Ou, localmente:
+Ou localmente:
 
 ```bash
 npm install
@@ -40,10 +38,6 @@ npm run deploy
 
 ## 4. Teste
 
-Abra:
+Abra `/admin`, entre com a senha e altere um preço. Clique em **Salvar alterações** e depois recarregue a página.
 
-`/admin`
-
-Entre com a senha e altere um preço. Clique em **Salvar alterações** e depois em **Recarregar**.
-
-Se o KV não estiver disponível, o painel mostrará claramente que o problema é o `CATALOG_KV`, em vez de apresentar apenas “verifique sua conexão”.
+Se o KV não estiver disponível, o painel informa que o binding `CATALOG_KV` precisa ser configurado.

@@ -5,6 +5,8 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ProductsProductIdRouteImport } from './routes/products/$productId'
+import { Route as CheckoutCancelRouteImport } from './routes/checkout/cancel'
+import { Route as CheckoutSuccessRouteImport } from './routes/checkout/success'
 import { Route as AdminAuthRouteImport } from './routes/admin-auth'
 import { Route as CatalogDataRouteImport } from './routes/catalog-data'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
@@ -24,6 +26,18 @@ const AdminRoute = AdminRouteImport.update({
 const ProductsProductIdRoute = ProductsProductIdRouteImport.update({
   id: '/products/$productId',
   path: '/products/$productId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CheckoutCancelRoute = CheckoutCancelRouteImport.update({
+  id: '/checkout/cancel',
+  path: '/checkout/cancel',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
+  id: '/checkout/success',
+  path: '/checkout/success',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -49,6 +63,8 @@ const routeTree = rootRoute.addChildren({
   IndexRoute,
   AdminRoute,
   ProductsProductIdRoute,
+  CheckoutCancelRoute,
+  CheckoutSuccessRoute,
   AdminAuthRoute,
   CatalogDataRoute,
   AnalyticsRoute,
